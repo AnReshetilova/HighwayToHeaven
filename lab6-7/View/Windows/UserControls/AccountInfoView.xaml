@@ -22,13 +22,14 @@
 
             <TextBlock  
                    Margin="40"
-                   Text="Имя :
-                   Дата регистрации"/>
+                   Text="{Binding Name}"/>
+            <TextBlock  
+                   Text="{Binding Age}"/>
             <TextBlock 
                    Margin="40"
                    Text="Смена пароля"/>
             <TextBlock Text="Старый пароль" Margin="40,0,0,0"/>
-            <PasswordBox Width="150" Margin="40,0,0,0" HorizontalAlignment="Left"/>
+            <TextBox Width="150" Margin="40,0,0,0" HorizontalAlignment="Left"/>
             <TextBlock Text="Новый пароль" Margin="40,0,0,0"/>
             <PasswordBox Width="150" Margin="40,0,0,0" HorizontalAlignment="Left"/>
             <TextBlock Text="Повторите пароль" Margin="40,0,0,0"/>

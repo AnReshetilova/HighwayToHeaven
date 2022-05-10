@@ -18,6 +18,9 @@
             <DataTemplate DataType="{x:Type vms:ToursInfoViewModel}">
                 <views:ToursInfoView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:AccountViewModel}">
+                <views:AccountInfoView/>
+            </DataTemplate>
         </Grid.Resources>
         
         <Grid.RowDefinitions>
@@ -48,7 +51,7 @@
                   Width="263">
             <TabControl>
                 <StackPanel Orientation="Vertical" Background="White">
-                    <Button Margin ="0,3,0,0" Height ="25" Content="Аккаунт"/>
+                    <Button Margin ="0,3,0,0" Height ="25" Content="Аккаунт" Command="{Binding OpenAccountInfoCommand}"/>
                     <Button Margin ="0,3,0,0" Height ="25" Content="Настройки"/>
                     <Button Margin ="0,3,0,0" Height ="25" Content="Путешествия" Command="{Binding OpenToursInfoCommand}"/>
                     <Button Margin ="0,3,0,0" Height ="25" Content="Добавление путешествия"/>

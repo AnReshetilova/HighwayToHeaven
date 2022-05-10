@@ -11,8 +11,8 @@ namespace lab6_7.Commands
 {
     class NavigateCommand : CommandBase
     {
-        readonly NavigationStore navigationStore;
-        readonly Func<ViewModel> createViewModel;
+        private readonly NavigationStore navigationStore;
+        private readonly Func<ViewModel> createViewModel;
 
         public NavigateCommand(NavigationStore navigationStore, Func<ViewModel> createViewModel)
         {

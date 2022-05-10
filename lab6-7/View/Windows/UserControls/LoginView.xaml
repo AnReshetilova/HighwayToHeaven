@@ -6,6 +6,24 @@
              xmlns:local="clr-namespace:lab6_7.View.Windows.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="850">
+    <UserControl.Resources>
+        <Style x:Key="RoundButton" TargetType="Button">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Name="GelBackground" StrokeThickness="1" Stroke="Black">
+                            </Ellipse>
+                            <ContentPresenter Name="GelButtonContent" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Content="{TemplateBinding Content}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid Background="#FFC3C3C3">
         <Grid.RowDefinitions>
             <RowDefinition Height="71*"></RowDefinition>
@@ -13,11 +31,25 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" VerticalAlignment="Top" Height="632" HorizontalAlignment="Center" Width="274">
-            <TextBlock Text="Логин"/>
-            <TextBox Text="{Binding Username , UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="Пароль"/>
-            <PasswordBox PasswordChar="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Content="Войти" Command="{Binding LoginCommand}"/>
+            <TextBlock Text="Логин" FontSize="40"/>
+            <TextBox Text="{Binding Username , UpdateSourceTrigger=PropertyChanged}" Height="40"/>
+            <TextBlock Text="Пароль" FontSize="40"/>
+            <TextBox Text ="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Height="40"/>
+            <Button Content="Войти" 
+                    Command="{Binding LoginCommand , UpdateSourceTrigger=PropertyChanged}" 
+                    FontSize="30" Margin="0,50,0,0" 
+                    Style="{StaticResource RoundButton}"
+                    Width="120" Height="120">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <TextBlock Text="{Binding Info}"/>
         </StackPanel>
     </Grid>
 </UserControl>
