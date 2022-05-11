@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:lab6_7.View.Windows.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="850">
-    <Grid  Background="#FFC3C3C3">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -21,19 +21,19 @@
         <Image Margin ="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Source="D:\вуз\4 сем\OOP_4_sem\lab6-7\View\Windows\resources\moon\moon.jpg" HorizontalAlignment="Stretch" />
 
         <ScrollViewer Grid.Row="1" Grid.ColumnSpan="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-            <WrapPanel  Orientation="Horizontal">
-                <Border BorderThickness="4" BorderBrush="AliceBlue" Margin="10" >
-                    <Image  Width="250" Source="D:\вуз\4 сем\OOP_4_sem\lab6-7\View\Windows\resources\mars\mars1.jpg"/>
-                </Border>
-
-                <Border BorderThickness="4" BorderBrush="AliceBlue" Margin="10" >
-                    <Image  Width="250" Source="D:\вуз\4 сем\OOP_4_sem\lab6-7\View\Windows\resources\venus\venus1 (1).jpg"/>
-                </Border>
-
-                <Border BorderThickness="4" BorderBrush="AliceBlue" Margin="10" >
-                    <Image  Width="250" Source="D:\вуз\4 сем\OOP_4_sem\lab6-7\View\Windows\resources\jupiter\jupiter1 (1).jpg"/>
-                </Border>
-            </WrapPanel>
+            <ItemsControl  x:Name="PictureList" ItemsSource="{Binding Planets}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Template="{DynamicResource Card}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+           
         </ScrollViewer>
     </Grid>
 </UserControl>

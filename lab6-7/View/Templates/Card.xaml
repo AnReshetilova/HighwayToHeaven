@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <ControlTemplate x:Key="Card">
+
+        <Border BorderThickness="4" BorderBrush="AliceBlue" Margin="10" >
+            <Image  Width="250" Source="{Binding Picture, UpdateSourceTrigger=PropertyChanged}"/>
+        </Border>
+
+
+    </ControlTemplate>
+
+</ResourceDictionary>

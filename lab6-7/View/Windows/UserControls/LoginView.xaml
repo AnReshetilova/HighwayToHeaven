@@ -14,7 +14,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Ellipse Name="GelBackground" StrokeThickness="1" Stroke="Black">
+                            <Ellipse Name="GelBackground" StrokeThickness="1" Stroke="DarkMagenta">
                             </Ellipse>
                             <ContentPresenter Name="GelButtonContent" VerticalAlignment="Center" HorizontalAlignment="Center"
                                            Content="{TemplateBinding Content}"/>
@@ -24,32 +24,58 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid Background="#FFC3C3C3">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="D:\вуз\4 сем\OOP_4_sem\lab6-7\View\Windows\resources\space\login.jpg" Stretch="UniformToFill" TileMode="None"></ImageBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="71*"></RowDefinition>
-            <RowDefinition Height="679*"></RowDefinition>
+            <RowDefinition Height="23*"></RowDefinition>
+            <RowDefinition Height="227*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Border Grid.Row="1" VerticalAlignment="Top" Height="397" HorizontalAlignment="Center" Width="274" BorderThickness="4" BorderBrush="DarkMagenta" Padding="4">
+            <StackPanel Orientation="Vertical" Background="#FFE4E1E7">
+                <TextBlock Text="Логин" FontSize="40" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                <TextBox Text="{Binding Username , UpdateSourceTrigger=PropertyChanged}" Height="40" Margin="5"/>
+                <TextBlock Text="Пароль" FontSize="40" HorizontalAlignment="Center"/>
+                <TextBox Text ="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Height="40" Margin="5"/>
+                <Border 
+                             Margin="0,30,0,0"
+                            Width="120" Height="120"
+                         BorderThickness="2"
+                    BorderBrush="DarkMagenta"
+                    Background ="#FFE4E1E7"
+                    CornerRadius="200">
+                    <TextBlock Text="Войти" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Border.InputBindings>
+                        <MouseBinding Command ="{Binding LoginCommand}"
+                                      MouseAction="LeftClick"/>
+                    </Border.InputBindings>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.1"
+                                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                            To="#FFE0DAE4">
+                                    </ColorAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.1"
+                                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                            To="#FFE4E1E7">
+                                    </ColorAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1" VerticalAlignment="Top" Height="632" HorizontalAlignment="Center" Width="274">
-            <TextBlock Text="Логин" FontSize="40"/>
-            <TextBox Text="{Binding Username , UpdateSourceTrigger=PropertyChanged}" Height="40"/>
-            <TextBlock Text="Пароль" FontSize="40"/>
-            <TextBox Text ="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Height="40"/>
-            <Button Content="Войти" 
-                    Command="{Binding LoginCommand , UpdateSourceTrigger=PropertyChanged}" 
-                    FontSize="30" Margin="0,50,0,0" 
-                    Style="{StaticResource RoundButton}"
-                    Width="120" Height="120">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-            </Button>
-            <TextBlock Text="{Binding Info}"/>
-        </StackPanel>
+                    </Border.Triggers>
+                </Border>
+                <TextBlock Text="{Binding Info}"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

@@ -19,6 +19,7 @@ namespace lab6_7
     {
         private readonly NavigationStore navigationStore;
         private readonly UserService userService;
+        private readonly TravelService travelService;
         private User userInfo;
 
         public App()
@@ -26,6 +27,7 @@ namespace lab6_7
             HIGHWAY_TO_HEAVENContext context = new HIGHWAY_TO_HEAVENContext();
             navigationStore = new NavigationStore();
             userService = new UserService(context);
+            travelService = new TravelService(context);
             userInfo = new User();
         }
         protected override void OnStartup(StartupEventArgs e)
@@ -34,14 +36,14 @@ namespace lab6_7
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainWindowViewModel(navigationStore, CreateLoginViewModel, CreateToursInfoViewModel, CreateAccountViewModel, SetUser)
+                DataContext = new MainWindowViewModel(navigationStore, CreateLoginViewModel, CreateToursInfoViewModel, CreateAccountViewModel, GetUser)
             };
             MainWindow.Show();
 
             base.OnStartup(e);
         }
 
-        private User SetUser()
+        private User GetUser()
         {
             return userInfo;
         }
@@ -58,12 +60,12 @@ namespace lab6_7
 
         private ToursInfoViewModel CreateToursInfoViewModel()
         {
-            return new ToursInfoViewModel();
+            return new ToursInfoViewModel(travelService);
         }
 
         private AccountViewModel CreateAccountViewModel()
         {
-            return new AccountViewModel(SetUser);
+            return new AccountViewModel(GetUser);
         }
     }
 }
