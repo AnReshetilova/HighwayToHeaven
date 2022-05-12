@@ -20,6 +20,7 @@ namespace Highway_to_heaven
         private readonly NavigationStore navigationStore;
         private readonly UserService userService;
         private readonly TravelService travelService;
+        private readonly PackageTour currentTour;
         private User userInfo;
 
         public App()
@@ -29,6 +30,7 @@ namespace Highway_to_heaven
             userService = new UserService(context);
             travelService = new TravelService(context);
             userInfo = new User();
+            currentTour = new PackageTour();
         }
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -36,7 +38,7 @@ namespace Highway_to_heaven
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainWindowViewModel(navigationStore, CreateLoginViewModel, CreateToursInfoViewModel, CreateAccountViewModel, GetUser)
+                DataContext = new MainWindowViewModel(navigationStore, CreateLoginViewModel, CreateToursInfoViewModel, CreateAccountViewModel, GetUser, CreateAddTourViewModel)
             };
             MainWindow.Show();
 
@@ -55,17 +57,29 @@ namespace Highway_to_heaven
 
         private LoginViewModel CreateLoginViewModel()
         {
-            return new LoginViewModel(userService, SetUser);
+            return new LoginViewModel(userService, SetUser, navigationStore, CreateRegistrationViewModel);
         }
 
         private ToursInfoViewModel CreateToursInfoViewModel()
         {
-            return new ToursInfoViewModel(travelService);
+            return new ToursInfoViewModel(navigationStore, travelService, currentTour, CreateTourInfoViewModel);
         }
 
         private AccountViewModel CreateAccountViewModel()
         {
             return new AccountViewModel(GetUser);
+        }
+        private TourInfoViewModel CreateTourInfoViewModel(object tour)
+        {
+            return new TourInfoViewModel(tour as PackageTour);
+        }
+        private AddTourViewModel CreateAddTourViewModel()
+        {
+            return new AddTourViewModel(travelService);
+        }
+        private RegistrationViewModel CreateRegistrationViewModel()
+        {
+            return new RegistrationViewModel(userService);
         }
     }
 }

@@ -32,14 +32,16 @@ namespace Highway_to_heaven.ViewModels
         public ICommand OpenToursInfoCommand { get; }
         public ICommand OpenLoginCommand { get; }
         public ICommand OpenAccountInfoCommand { get; }
+        public ICommand OpenAddTourCommand { get; }
 
-        public MainWindowViewModel(NavigationStore navigationStore, Func<ViewModel> createLoginViewModel, Func<ViewModel> createToursInfoViewModel, Func<ViewModel> createAccountViewModel, Func<User> SetUser)
+        public MainWindowViewModel(NavigationStore navigationStore, Func<ViewModel> createLoginViewModel, Func<ViewModel> createToursInfoViewModel, Func<ViewModel> createAccountViewModel, Func<User> SetUser, Func<ViewModel> createAddTourViewModel)
         {
             this.navigationStore = navigationStore;
 
             OpenToursInfoCommand = new NavigateCommand(this.navigationStore, createToursInfoViewModel);
             OpenLoginCommand = new NavigateCommand(this.navigationStore, createLoginViewModel);
             OpenAccountInfoCommand = new NavigateCommand(this.navigationStore, createAccountViewModel);
+            OpenAddTourCommand = new NavigateCommand(this.navigationStore, createAddTourViewModel);
 
             this.navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }

@@ -10,9 +10,15 @@ namespace Highway_to_heaven.ViewModels
 {
     class AccountViewModel : ViewModel
     {
+        const string NAME = "NAME: ";
+        const string AGE = "AGE: ";
+        const string ADDRESS = "ADDRESS: ";
+
         private string name;
         private string age;
-        private string nowNew;
+        private string address;
+        private string picture;
+
         User userInfo;
 
         public string Name
@@ -20,8 +26,7 @@ namespace Highway_to_heaven.ViewModels
             get => name;
             set
             {
-                name = value;
-                InvokePropertyChanged(nameof(Name));
+                Set(ref name, NAME + value);
             }
         }
 
@@ -30,15 +35,36 @@ namespace Highway_to_heaven.ViewModels
             get => age;
             set
             {
-                age = value;
-                InvokePropertyChanged(nameof(age));
+                Set(ref age, AGE + value);
+            }
+        }
+
+        public string Address
+        {
+            get => address;
+            set
+            {
+                Set(ref address, ADDRESS + value);
+            }
+        }
+
+        public string Picture
+        {
+            get => picture;
+            set
+            {
+                Set(ref picture, value);
             }
         }
 
         public AccountViewModel (Func<User> SetUser)
         {
             userInfo = SetUser();
+
             Name = userInfo.Name;
+            Age = userInfo.Age.ToString();
+            Address = userInfo.Address;
+            Picture = userInfo.Picture;
         }
     }
 }

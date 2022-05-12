@@ -10,6 +10,14 @@
         mc:Ignorable="d"
         Title="{Binding Title}" 
         Height="750" Width="850">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="Play"/>
+            <Setter Property="BorderBrush" Value="DarkMagenta"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Resources>
     <Grid >
         <Grid.Background>
             <ImageBrush ImageSource="D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\space\spaceLogin1.jpg" Stretch="UniformToFill"></ImageBrush>
@@ -24,6 +32,15 @@
             <DataTemplate DataType="{x:Type vms:AccountViewModel}">
                 <views:AccountInfoView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:TourInfoViewModel}">
+                <views:TourInfoView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:AddTourViewModel}">
+                <views:AddTourView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:RegistrationViewModel}">
+                <views:RegistrationView/>
+            </DataTemplate>
         </Grid.Resources>
         
         <Grid.RowDefinitions>
@@ -37,11 +54,7 @@
             <ColumnDefinition Width="468*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-       
-
-        <ContentControl Content="{Binding CurrentViewModel}" Grid.Row= "1" Grid.RowSpan= "3" Grid.ColumnSpan="3"/>
-        
-        
+        <ContentControl Content="{Binding CurrentViewModel}" Grid.Row= "1" Grid.RowSpan= "3" Grid.ColumnSpan="3" x:Name="ContentConrol"/>
 
         <Expander Grid.RowSpan="3" Grid.ColumnSpan="2"
                   Header="Админ"
@@ -55,7 +68,7 @@
                     <Button Margin ="0,3,0,0" Height ="25" Content="Аккаунт" Command="{Binding OpenAccountInfoCommand}"/>
                     <Button Margin ="0,3,0,0" Height ="25" Content="Настройки"/>
                     <Button Margin ="0,3,0,0" Height ="25" Content="Путешествия" Command="{Binding OpenToursInfoCommand}"/>
-                    <Button Margin ="0,3,0,0" Height ="25" Content="Добавление путешествия"/>
+                    <Button Margin ="0,3,0,0" Height ="25" Content="Добавление путешествия" Command="{Binding OpenAddTourCommand}"/>
                     <Button Margin ="0,3,0,0" Height ="25" Content="Добавление планеты"/>
                     <Button Margin ="0,3,0,0" Height ="25" Content="Выход" Command="{Binding OpenLoginCommand}"/>
                 </StackPanel>

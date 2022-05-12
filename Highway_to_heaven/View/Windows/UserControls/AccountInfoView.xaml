@@ -6,7 +6,15 @@
              xmlns:local="clr-namespace:Highway_to_heaven.View.Windows.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="850">
-    <Grid  Background="#FFC3C3C3">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Play"/>
+            <Setter Property="Margin" Value="15"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="71*"></RowDefinition>
             <RowDefinition Height="679*"></RowDefinition>
@@ -16,24 +24,17 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" VerticalAlignment="Top" Height="632" HorizontalAlignment="Center" Width="274">
-            <Border BorderThickness="4" BorderBrush="AliceBlue" Grid.Row="1" Grid.Column="1" Margin="11,11,11,0" Height="240" Width="240">
-                <Image />
+            <Border BorderThickness="4" BorderBrush="DarkMagenta" Grid.Row="1" Grid.Column="1" Margin="11,11,11,0" Height="240" Width="240" Padding="4">
+                <Image Source="{Binding Picture}"/>
             </Border>
 
             <TextBlock  
-                   Margin="40"
+                   Margin="15, 40, 15, 15"
                    Text="{Binding Name}"/>
             <TextBlock  
                    Text="{Binding Age}"/>
-            <TextBlock 
-                   Margin="40"
-                   Text="Смена пароля"/>
-            <TextBlock Text="Старый пароль" Margin="40,0,0,0"/>
-            <TextBox Width="150" Margin="40,0,0,0" HorizontalAlignment="Left"/>
-            <TextBlock Text="Новый пароль" Margin="40,0,0,0"/>
-            <PasswordBox Width="150" Margin="40,0,0,0" HorizontalAlignment="Left"/>
-            <TextBlock Text="Повторите пароль" Margin="40,0,0,0"/>
-            <PasswordBox Width="150" Margin="40,0,0,0" HorizontalAlignment="Left"/>
+            <TextBlock  
+                   Text="{Binding Address}"/>
         </StackPanel>
 
 

@@ -13,6 +13,7 @@ namespace Highway_to_heaven.Commands
     {
         private readonly NavigationStore navigationStore;
         private readonly Func<ViewModel> createViewModel;
+        private readonly Func<object, ViewModel> createViewModelWithParam;
 
         public NavigateCommand(NavigationStore navigationStore, Func<ViewModel> createViewModel)
         {
@@ -20,9 +21,22 @@ namespace Highway_to_heaven.Commands
             this.createViewModel = createViewModel;
         }
 
+        public NavigateCommand(NavigationStore navigationStore, Func<object, ViewModel> createViewModel)
+        {
+            this.navigationStore = navigationStore;
+            this.createViewModelWithParam = createViewModel;
+        }
+
         public override void Execute(object parameter)
         {
-            navigationStore.CurrentViewModel = createViewModel();
+            if (parameter != null)
+            {
+                navigationStore.CurrentViewModel = createViewModelWithParam(parameter);
+            }
+            else
+            {
+                navigationStore.CurrentViewModel = createViewModel();
+            }
         }
     }
 }

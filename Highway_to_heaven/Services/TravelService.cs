@@ -26,5 +26,11 @@ namespace Highway_to_heaven.Services
         {
             return this.context.PackageTours.Where(t => t.PlanetName.Contains(name)).AsEnumerable();
         }
+
+        public void AddNewTour(PackageTour packageTour)
+        {
+            this.context.PackageTours.Add(packageTour);
+            context.SaveChanges();
+        }
     }
 }

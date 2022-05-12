@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Highway_to_heaven.View.Windows.UserControls.TourInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Highway_to_heaven.View.Windows.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="850">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Play"/>
+            <Setter Property="Margin" Value="15"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="429*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="88*"></ColumnDefinition>
+            <ColumnDefinition Width="677*"></ColumnDefinition>
+            <ColumnDefinition Width="85*"></ColumnDefinition>
+            
+        </Grid.ColumnDefinitions>
+
+        <WrapPanel Grid.Row="1" Grid.Column="1">
+            <Border BorderThickness="2" BorderBrush="White">
+                <Image Source="{Binding PicturePath,UpdateSourceTrigger=PropertyChanged}" Width="250" Height="250" Margin="3" Stretch="UniformToFill"/>
+            </Border>
+            <Border BorderThickness="0,2,2,0" BorderBrush="DarkMagenta" Padding="5" Margin="10,0,0,0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding TourName,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding PlanetName,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding NumberOFDays,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding Raiting,UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </Border>
+
+
+                <Border BorderThickness="2,0,0,2" BorderBrush="DarkMagenta" Padding="5" Margin="0,10,0,0">
+                    <TextBlock Text="{Binding Discription,UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
+                </Border>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="15,15,0,0">
+                <Button Width="110"  Height ="70" Background="{x:Null}" BorderBrush="DarkMagenta" Content="Отправиться!" Foreground="White"/>
+                <Button  Width="110"  Height ="70" Background="{x:Null}" BorderBrush="DarkMagenta" Content="Комментарии" Foreground="White" Margin="30,0,10,0"/>
+            </StackPanel>
+        </WrapPanel>
+        
+    </Grid>
+</UserControl>

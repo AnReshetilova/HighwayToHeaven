@@ -52,14 +52,16 @@ namespace Highway_to_heaven.ViewModels
         }
 
         public ICommand LoginCommand { get; }
+        public ICommand OpenRegistrationCommand { get; }
 
-        public LoginViewModel(UserService userService, Action<User> setUser)
+        public LoginViewModel(UserService userService, Action<User> setUser, NavigationStore navigationStore, Func<ViewModel> createRegistrationViewModel)
         {
             this.userService = userService;
             this.userInfo = new User();
             this.setUser = setUser;
 
-            LoginCommand = new LoginCommand(onLoginCommandExecute);
+            LoginCommand = new ExternalCommand(onLoginCommandExecute);
+            OpenRegistrationCommand = new NavigateCommand(navigationStore, createRegistrationViewModel);
         }
 
         private void onLoginCommandExecute(object o)

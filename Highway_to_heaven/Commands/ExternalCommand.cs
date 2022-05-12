@@ -8,14 +8,14 @@ using Highway_to_heaven.Models;
 
 namespace Highway_to_heaven.Commands
 {
-    class LoginCommand : CommandBase
+    class ExternalCommand : CommandBase
     {
         private readonly Action<object> execute; // тк с readonly быстрее работает
         private readonly Func<object, bool> canExecute;
 
         public override void Execute(object parameter) => execute(parameter);
 
-        public LoginCommand(Action<object> execute)
+        public ExternalCommand(Action<object> execute)
         {
             this.execute = execute ?? throw new ArgumentNullException(nameof(Execute));
         }
