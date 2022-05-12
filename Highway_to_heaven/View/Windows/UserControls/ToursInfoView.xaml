@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Highway_to_heaven.View.Windows.UserControls.ToursInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Highway_to_heaven.View.Windows.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="850">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border BorderThickness="0, 2" BorderBrush="DarkMagenta" Grid.Row= "0" Grid.ColumnSpan="3" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Image Source="D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\search1.jpg" Margin="8"/>
+            <TextBox Grid.Column ="2" Width="238" Height="25"  Margin="0,0,10,00" TextAlignment="Right" FontSize="15" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </Border>
+
+        <Image Margin ="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Source="D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\moon\moon.jpg" HorizontalAlignment="Stretch" />
+
+        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+            <ItemsControl  x:Name="PictureList" ItemsSource="{Binding Tours}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Template="{DynamicResource Card}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+           
+        </ScrollViewer>
+    </Grid>
+</UserControl>
