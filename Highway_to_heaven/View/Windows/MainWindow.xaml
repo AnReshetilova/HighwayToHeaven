@@ -41,6 +41,15 @@
             <DataTemplate DataType="{x:Type vms:RegistrationViewModel}">
                 <views:RegistrationView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:SettingsViewModel}">
+                <views:SettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:AddPlanetViewModel}">
+                <views:AddPlanetView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:CommentsViewModel}">
+                <views:CommentsView/>
+            </DataTemplate>
         </Grid.Resources>
         
         <Grid.RowDefinitions>
@@ -66,10 +75,10 @@
             <TabControl>
                 <StackPanel Orientation="Vertical" Background="White">
                     <Button Margin ="0,3,0,0" Height ="25" Content="Аккаунт" Command="{Binding OpenAccountInfoCommand}"/>
-                    <Button Margin ="0,3,0,0" Height ="25" Content="Настройки"/>
+                    <Button Margin ="0,3,0,0" Height ="25" Content="Настройки" Command="{Binding OpenSettingsCommand}"/>
                     <Button Margin ="0,3,0,0" Height ="25" Content="Путешествия" Command="{Binding OpenToursInfoCommand}"/>
                     <Button Margin ="0,3,0,0" Height ="25" Content="Добавление путешествия" Command="{Binding OpenAddTourCommand}"/>
-                    <Button Margin ="0,3,0,0" Height ="25" Content="Добавление планеты"/>
+                    <Button Margin ="0,3,0,0" Height ="25" Content="Добавление планеты" Command="{Binding OpenAddPlanetCommand}"/>
                     <Button Margin ="0,3,0,0" Height ="25" Content="Выход" Command="{Binding OpenLoginCommand}"/>
                 </StackPanel>
             </TabControl>

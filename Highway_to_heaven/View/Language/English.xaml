@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:j="clr-namespace:System;assembly=mscorlib">
+
+    <j:String x:Key="Login">Login</j:String>
+    
+</ResourceDictionary>

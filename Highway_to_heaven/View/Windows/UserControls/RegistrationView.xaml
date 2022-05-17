@@ -35,10 +35,10 @@
                 <ColumnDefinition Width="390*"></ColumnDefinition>
                 <ColumnDefinition Width="209*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" BorderThickness="4" BorderBrush="DarkMagenta" Padding="4" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,222,0">
+            <Border Grid.Column="1" BorderThickness="4"  Padding="4" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,222,0">
                 <StackPanel Orientation="Vertical" Background="#FFE4E1E7">
                     <StackPanel Orientation="Horizontal">
-                        <Border BorderThickness="1" BorderBrush="DarkMagenta" Margin="15" Width="180" Height="180" >
+                        <Border BorderThickness="1" Margin="15" Width="180" Height="180" >
                             <Image Source="{Binding Avatar, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
                             <Border.InputBindings>
                                 <MouseBinding Command ="{Binding AddAvatarCommand}"
@@ -62,7 +62,6 @@
                              Margin="0,30,0,0"
                              Width="90" Height="90"
                              BorderThickness="2"
-                             BorderBrush="DarkMagenta"
                              Background ="#FFE4E1E7"
                              CornerRadius="200"
                              HorizontalAlignment="Center">

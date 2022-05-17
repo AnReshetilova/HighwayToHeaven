@@ -22,7 +22,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Border BorderThickness="0, 2" BorderBrush="DarkMagenta" Grid.Row= "0" Grid.ColumnSpan="3" >
+        <Border BorderThickness="0, 2"  Grid.Row= "0" Grid.ColumnSpan="3" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Image Source="D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\search1.jpg" Margin="8"/>
             <TextBox Grid.Column ="2" Width="238" Height="25"  Margin="0,0,10,00" TextAlignment="Right" FontSize="15" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>

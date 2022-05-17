@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ControlTemplate x:Key="Comment">
+        <ControlTemplate.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontFamily" Value="Play"/>
+            </Style>
+        </ControlTemplate.Resources>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Width="460" Height="100">
+            <Border BorderThickness="1" Margin="5" Width="80" Height="80">
+                <Image Source="{Binding IdTravelerNavigation.Picture, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
+            <StackPanel Orientation="Vertical" Margin="10" Width="350">
+                <TextBlock Text="{Binding IdTravelerNavigation.Username, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="{Binding TextComment, UpdateSourceTrigger=PropertyChanged}" Height="50"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding DateComment}"/>
+                    <TextBlock Width="20" Margin ="100,0,5,0" TextAlignment="Right" Text="{Binding Likes, UpdateSourceTrigger=PropertyChanged}" />
+                    <Image Height="10" Width ="10" Source="D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\like.png" Margin ="0,0,5,0" IsEnabled="{Binding CanLike}">
+                        <Image.InputBindings>
+                            <MouseBinding Command ="{Binding DataContext.LikeCommand, RelativeSource={RelativeSource Mode=FindAncestor,
+                                AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"
+                                      MouseAction="LeftClick"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <TextBlock Width="20" TextAlignment="Right" Text="{Binding Dislikes, UpdateSourceTrigger=PropertyChanged}" Margin ="0,0,5,0"/>
+                    <Image Height="10" Width ="10" Source="D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\dislike.png" Margin ="0,0,5,0" IsEnabled="{Binding CanLike}">
+                        <Image.InputBindings>
+                            <MouseBinding Command ="{Binding DataContext.DislikeCommand, RelativeSource={RelativeSource Mode=FindAncestor,
+                                AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"
+                                      MouseAction="LeftClick"/>
+                        </Image.InputBindings>
+                    </Image>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </ControlTemplate>
+</ResourceDictionary>

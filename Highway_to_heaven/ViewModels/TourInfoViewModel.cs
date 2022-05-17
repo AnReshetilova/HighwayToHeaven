@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Highway_to_heaven.Commands;
 using Highway_to_heaven.Models;
+using Highway_to_heaven.Stores;
 using Highway_to_heaven.ViewModels.Base;
 
 namespace Highway_to_heaven.ViewModels
@@ -23,6 +26,9 @@ namespace Highway_to_heaven.ViewModels
         private string discription;
         private string raiting;
         private string picturePath;
+
+        public ICommand OpenCommentsCommand { get; }
+        public ICommand createCommentViewModelCommand { get; }
 
         public string TourName
         {
@@ -54,7 +60,7 @@ namespace Highway_to_heaven.ViewModels
             get => raiting;
             set => Set(ref raiting, RAIT + value);
         }
-        public TourInfoViewModel(PackageTour packageTour)
+        public TourInfoViewModel(PackageTour packageTour, NavigationStore navigationStore, Func<object, ViewModel> createCommentsViewModel)
         {
             this.packageTour = packageTour;
             TourName = packageTour.TourName;
@@ -63,6 +69,14 @@ namespace Highway_to_heaven.ViewModels
             Discription = packageTour.Description;
             Raiting = packageTour.Rating.ToString();
             PicturePath = packageTour.SecondPicture;
+
+            OpenCommentsCommand = new ExternalCommand(onOpenCommentsCommand);
+            createCommentViewModelCommand = new NavigateCommand(navigationStore, createCommentsViewModel);
+        }
+
+        private void onOpenCommentsCommand(object o)
+        {
+            createCommentViewModelCommand.Execute(packageTour);
         }
     }
 }

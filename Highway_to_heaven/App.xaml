@@ -6,6 +6,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./View/Templates/Card.xaml" />
+                <ResourceDictionary Source="./View/Themes/DarkMagentaTheme.xaml" />
+                <ResourceDictionary Source="./View/Language/Russian.xaml" />
+                <ResourceDictionary Source="./View/Templates/Comment.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

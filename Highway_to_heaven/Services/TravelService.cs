@@ -32,5 +32,11 @@ namespace Highway_to_heaven.Services
             this.context.PackageTours.Add(packageTour);
             context.SaveChanges();
         }
+
+        public void AddNewPlanet(Planet planet)
+        {
+            this.context.Planets.Add(planet);
+            context.SaveChanges();
+        }
     }
 }

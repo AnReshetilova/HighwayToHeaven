@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Win32;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Highway_to_heaven.ViewModels.Base
@@ -25,6 +26,14 @@ namespace Highway_to_heaven.ViewModels.Base
             field = value;
             InvokePropertyChanged(PropertyName);
             return true;
+        }
+
+        protected virtual OpenFileDialog AddPicture()
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Image files (*.BMP, *.JPG, *.GIF, *.TIF, *.PNG, *.ICO, *.EMF, *.WMF)|*.bmp;*.jpg;*.gif; *.tif; *.png; *.ico; *.emf; *.wmf";
+            fileDialog.ShowDialog();
+            return fileDialog;
         }
     }
 }

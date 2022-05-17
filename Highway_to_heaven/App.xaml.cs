@@ -38,7 +38,8 @@ namespace Highway_to_heaven
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainWindowViewModel(navigationStore, CreateLoginViewModel, CreateToursInfoViewModel, CreateAccountViewModel, GetUser, CreateAddTourViewModel)
+                DataContext = new MainWindowViewModel(navigationStore, CreateLoginViewModel, CreateToursInfoViewModel, CreateAccountViewModel, GetUser, 
+                    CreateAddTourViewModel, CreateSettingsViewModel, CreateAddPlanetViewModel)
             };
             MainWindow.Show();
 
@@ -54,7 +55,10 @@ namespace Highway_to_heaven
         {
             this.userInfo = userInfo;
         }
-
+        private SettingsViewModel CreateSettingsViewModel()
+        {
+            return new SettingsViewModel();
+        }
         private LoginViewModel CreateLoginViewModel()
         {
             return new LoginViewModel(userService, SetUser, navigationStore, CreateRegistrationViewModel);
@@ -71,7 +75,7 @@ namespace Highway_to_heaven
         }
         private TourInfoViewModel CreateTourInfoViewModel(object tour)
         {
-            return new TourInfoViewModel(tour as PackageTour);
+            return new TourInfoViewModel(tour as PackageTour, navigationStore, CreateCommentsViewModel);
         }
         private AddTourViewModel CreateAddTourViewModel()
         {
@@ -80,6 +84,14 @@ namespace Highway_to_heaven
         private RegistrationViewModel CreateRegistrationViewModel()
         {
             return new RegistrationViewModel(userService);
+        }
+        private AddPlanetViewModel CreateAddPlanetViewModel()
+        {
+            return new AddPlanetViewModel(travelService);
+        }
+        private CommentsViewModel CreateCommentsViewModel(object tour)
+        {
+            return new CommentsViewModel(userService, tour as PackageTour);
         }
     }
 }

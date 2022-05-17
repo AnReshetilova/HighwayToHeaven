@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Highway_to_heaven.View.Windows.UserControls.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Highway_to_heaven.View.Windows.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="850">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel  Grid.Row="1" Grid.Column="1">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Тема" Foreground="White" Height="25"/>
+            <Ellipse Margin=" 20" Width="20" Height="20" Fill="DarkMagenta">
+                <Ellipse.InputBindings>
+                    <MouseBinding Command ="{Binding SetDarkMagentaThemeCommand}"
+                                      MouseAction="LeftClick"/>
+                </Ellipse.InputBindings>
+            </Ellipse>
+                <Ellipse Margin=" 20" Width="20" Height="20" Fill="DarkCyan">
+                    <Ellipse.InputBindings>
+                        <MouseBinding Command ="{Binding SetDarkCyanThemeCommand}"
+                                  CommandParameter="cyan"
+                                      MouseAction="LeftClick"/>
+                    </Ellipse.InputBindings>
+                </Ellipse>
+            </StackPanel>
+        
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -79,16 +79,12 @@ namespace Highway_to_heaven.ViewModels
 
         private void OnAddSecondPictureCommand(object o)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "Image files (*.BMP, *.JPG, *.GIF, *.TIF, *.PNG, *.ICO, *.EMF, *.WMF)|*.bmp;*.jpg;*.gif; *.tif; *.png; *.ico; *.emf; *.wmf";
-            fileDialog.ShowDialog();
+            FileDialog fileDialog = AddPicture();
             SecondImage = fileDialog.FileName;
         }
         private void OnAddFirstPictureCommand(object o)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "Image files (*.BMP, *.JPG, *.GIF, *.TIF, *.PNG, *.ICO, *.EMF, *.WMF)|*.bmp;*.jpg;*.gif; *.tif; *.png; *.ico; *.emf; *.wmf";
-            fileDialog.ShowDialog();
+            FileDialog fileDialog = AddPicture();
             FirstImage = fileDialog.FileName;
         }
 

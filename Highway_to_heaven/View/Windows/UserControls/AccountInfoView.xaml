@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" VerticalAlignment="Top" Height="632" HorizontalAlignment="Center" Width="274">
-            <Border BorderThickness="4" BorderBrush="DarkMagenta" Grid.Row="1" Grid.Column="1" Margin="11,11,11,0" Height="240" Width="240" Padding="4">
+            <Border BorderThickness="4" Grid.Row="1" Grid.Column="1" Margin="11,11,11,0" Height="240" Width="240" Padding="4">
                 <Image Source="{Binding Picture}"/>
             </Border>
 

@@ -66,7 +66,7 @@ namespace Highway_to_heaven.ViewModels
 
         private void onLoginCommandExecute(object o)
         {
-            userInfo = userService.GetUserByName(username);
+            userInfo = userService.GetUserByLogin(username);
 
             if (userInfo == null)
             {

@@ -16,14 +16,11 @@ namespace Highway_to_heaven.Services
             this.context = context;
         }
 
-        public User GetUserByName(string name)
-        {
-            return this.context.Users.FirstOrDefault(t => t.Login.Equals(name));
-        }
         public User GetUserByLogin(string login)
         {
             return this.context.Users.FirstOrDefault(t => t.Login.Equals(login));
         }
+
         public bool AddNewUser(User user)
         {
             if (GetUserByLogin(user.Login) != null)
@@ -33,6 +30,21 @@ namespace Highway_to_heaven.Services
             context.Users.Add(user);
             context.SaveChanges();
             return true;
+        }
+
+        public IEnumerable<Comment> GetCommentsCollectionByTourId(int id)
+        {
+            return this.context.Comments.Where(t => t.IdTour.Equals(id)).AsEnumerable();
+        }
+        public IEnumerable<User> GetUserList()
+        {
+            return context.Users.AsEnumerable();
+        }
+
+        public void IncreaseCommentLikes(int id)
+        {
+            context.Comments.FirstOrDefault(t => t.IdComment.Equals(id)).Likes++;
+            context.SaveChanges();
         }
     }
 }
