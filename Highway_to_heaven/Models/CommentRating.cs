@@ -24,8 +24,10 @@ namespace Highway_to_heaven.Models
         public bool? Disliked { get; set; }
 
         [ForeignKey("IdComment")]
+        [InverseProperty("CommentRatings")]
         public virtual Comment IdCommentNavigation { get; set; }
         [ForeignKey("IdUser")]
+        [InverseProperty("CommentRatings")]
         public virtual User IdUserNavigation { get; set; }
     }
 }

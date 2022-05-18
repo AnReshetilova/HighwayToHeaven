@@ -75,5 +75,10 @@ namespace Highway_to_heaven.Services
             context.Comments.Add(comment);
             context.SaveChanges();
         }
+
+        public int? GetUserScore(string userId)
+        {
+            return context.Travels.Where(t => t.IdTraveler.Equals(userId)).Sum(t => t.Score);
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Highway_to_heaven.Commands;
 using Highway_to_heaven.Models;
+using Highway_to_heaven.Services;
 using Highway_to_heaven.Stores;
 using Highway_to_heaven.ViewModels.Base;
 
@@ -26,10 +27,18 @@ namespace Highway_to_heaven.ViewModels
         private string discription;
         private string raiting;
         private string picturePath;
+        private string isAllowed;
 
         public ICommand OpenCommentsCommand { get; }
-        public ICommand createCommentViewModelCommand { get; }
+        private ICommand createCommentViewModelCommand { get; }
+        public ICommand OpenQuestionCommand { get; }
+        private ICommand createQuestionViewModelCommand { get; }
 
+        public string IsAllowed
+        {
+            get => isAllowed;
+            set => Set(ref isAllowed, value);
+        }
         public string TourName
         {
             get => tourName;
@@ -60,7 +69,7 @@ namespace Highway_to_heaven.ViewModels
             get => raiting;
             set => Set(ref raiting, RAIT + value);
         }
-        public TourInfoViewModel(PackageTour packageTour, NavigationStore navigationStore, Func<object, ViewModel> createCommentsViewModel)
+        public TourInfoViewModel(PackageTour packageTour, NavigationStore navigationStore, Func<object, ViewModel> createCommentsViewModel, Func<object, ViewModel> createQuestionViewModel, TravelService travelService, User user)
         {
             this.packageTour = packageTour;
             TourName = packageTour.TourName;
@@ -71,12 +80,28 @@ namespace Highway_to_heaven.ViewModels
             PicturePath = packageTour.SecondPicture;
 
             OpenCommentsCommand = new ExternalCommand(onOpenCommentsCommand);
+            OpenQuestionCommand = new ExternalCommand(onOpenQuestionCommand);
             createCommentViewModelCommand = new NavigateCommand(navigationStore, createCommentsViewModel);
+            createQuestionViewModelCommand = new NavigateCommand(navigationStore, createQuestionViewModel);
+
+            if (travelService.GetTravelByUserTourId(user.Login, packageTour.IdTour) != null || travelService.GetTravelByTourId(packageTour.IdTour).Count() == 0)
+            {
+                IsAllowed = "Collapsed";
+            }
+            else
+            {
+                IsAllowed = "Visible";
+            }
         }
 
         private void onOpenCommentsCommand(object o)
         {
             createCommentViewModelCommand.Execute(packageTour);
+        }
+
+        private void onOpenQuestionCommand(object o)
+        {
+            createQuestionViewModelCommand.Execute(packageTour);
         }
     }
 }

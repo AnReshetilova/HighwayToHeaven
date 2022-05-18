@@ -52,6 +52,12 @@
             <DataTemplate DataType="{x:Type vms:PlanetsViewModel}">
                 <views:PlanetsView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:QuestionViewModel}">
+                <views:QuestionsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:StatisticsViewModel}">
+                <views:StatisticsView/>
+            </DataTemplate>
         </Grid.Resources>
 
         <Grid.RowDefinitions>

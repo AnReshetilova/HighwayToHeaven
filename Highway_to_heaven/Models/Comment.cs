@@ -9,6 +9,11 @@ namespace Highway_to_heaven.Models
     [Table("COMMENT")]
     public partial class Comment
     {
+        public Comment()
+        {
+            CommentRatings = new HashSet<CommentRating>();
+        }
+
         [Key]
         [Column("id_comment")]
         public int IdComment { get; set; }
@@ -31,5 +36,7 @@ namespace Highway_to_heaven.Models
         [ForeignKey("IdTraveler")]
         [InverseProperty("Comments")]
         public virtual User IdTravelerNavigation { get; set; }
+        [InverseProperty("IdCommentNavigation")]
+        public virtual ICollection<CommentRating> CommentRatings { get; set; }
     }
 }

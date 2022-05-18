@@ -18,14 +18,8 @@ namespace Highway_to_heaven.Models
         [StringLength(30)]
         [Unicode(false)]
         public string IdTraveler { get; set; }
-        [Column("departure_date", TypeName = "date")]
-        public DateTime? DepartureDate { get; set; }
-        [Column("return_date", TypeName = "date")]
-        public DateTime? ReturnDate { get; set; }
-        [Column("picture")]
-        [StringLength(70)]
-        [Unicode(false)]
-        public string Picture { get; set; }
+        [Column("score")]
+        public int? Score { get; set; }
 
         [ForeignKey("IdTour")]
         [InverseProperty("Travels")]

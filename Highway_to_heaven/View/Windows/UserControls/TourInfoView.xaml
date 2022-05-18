@@ -17,16 +17,16 @@
     </UserControl.Resources>
     <Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="37*"></RowDefinition>
-            <RowDefinition Height="429*"></RowDefinition>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="88*"></ColumnDefinition>
-            <ColumnDefinition Width="677*"></ColumnDefinition>
-            <ColumnDefinition Width="85*"></ColumnDefinition>
-            
+            <ColumnDefinition Width="82*"></ColumnDefinition>
+            <ColumnDefinition Width="693*"></ColumnDefinition>
+            <ColumnDefinition Width="75*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="84*"></RowDefinition>
+            <RowDefinition Height="235*"></RowDefinition>
+            <RowDefinition Height="56*"></RowDefinition>
+        </Grid.RowDefinitions>
 
         <WrapPanel Grid.Row="1" Grid.Column="1">
             <Border BorderThickness="2" BorderBrush="White">
@@ -42,14 +42,14 @@
             </Border>
 
 
-                <Border BorderThickness="2,0,0,2" Padding="5" Margin="0,10,0,0">
-                    <TextBlock Text="{Binding Discription,UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
-                </Border>
+            <Border BorderThickness="2,0,0,2" Padding="5" Margin="0,10,0,0">
+                <TextBlock Text="{Binding Discription,UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MaxWidth="400"/>
+            </Border>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="15,15,0,0">
-                <Button Width="110"  Height ="70" Background="{x:Null}" Content="Отправиться!" Foreground="White"/>
+                <Button Width="110"  Height ="70" Background="{x:Null}" Content="Отправиться!" Foreground="White" Command="{Binding OpenQuestionCommand}" Visibility="{Binding IsAllowed}"/>
                 <Button  Width="110"  Height ="70" Background="{x:Null}" Content="Комментарии" Foreground="White" Margin="30,0,10,0" Command="{Binding OpenCommentsCommand}"/>
             </StackPanel>
         </WrapPanel>
-        
+
     </Grid>
 </UserControl>

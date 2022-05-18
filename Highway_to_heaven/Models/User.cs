@@ -11,6 +11,7 @@ namespace Highway_to_heaven.Models
     {
         public User()
         {
+            CommentRatings = new HashSet<CommentRating>();
             Comments = new HashSet<Comment>();
             Travels = new HashSet<Travel>();
         }
@@ -41,6 +42,8 @@ namespace Highway_to_heaven.Models
         [Unicode(false)]
         public string Picture { get; set; }
 
+        [InverseProperty("IdUserNavigation")]
+        public virtual ICollection<CommentRating> CommentRatings { get; set; }
         [InverseProperty("IdTravelerNavigation")]
         public virtual ICollection<Comment> Comments { get; set; }
         [InverseProperty("IdTravelerNavigation")]

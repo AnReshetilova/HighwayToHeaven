@@ -16,10 +16,12 @@ namespace Highway_to_heaven.Models
         {
         }
 
+        public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<CommentRating> CommentRatings { get; set; }
         public virtual DbSet<PackageTour> PackageTours { get; set; }
         public virtual DbSet<Planet> Planets { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Travel> Travels { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -34,6 +36,17 @@ namespace Highway_to_heaven.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Answer>(entity =>
+            {
+                entity.HasKey(e => e.IdAnswer)
+                    .HasName("PK__ANSWER__613ACE9A762661AF");
+
+                entity.HasOne(d => d.IdQuestionNavigation)
+                    .WithMany(p => p.Answers)
+                    .HasForeignKey(d => d.IdQuestion)
+                    .HasConstraintName("FK__ANSWER__id_quest__5FB337D6");
+            });
+
             modelBuilder.Entity<Comment>(entity =>
             {
                 entity.HasKey(e => e.IdComment)
@@ -54,15 +67,13 @@ namespace Highway_to_heaven.Models
 
             modelBuilder.Entity<CommentRating>(entity =>
             {
-                entity.Property(e => e.RatingId).ValueGeneratedOnAdd();
-
                 entity.HasOne(d => d.IdCommentNavigation)
-                    .WithMany()
+                    .WithMany(p => p.CommentRatings)
                     .HasForeignKey(d => d.IdComment)
                     .HasConstraintName("FK__COMMENT_R__id_co__4BAC3F29");
 
                 entity.HasOne(d => d.IdUserNavigation)
-                    .WithMany()
+                    .WithMany(p => p.CommentRatings)
                     .HasForeignKey(d => d.IdUser)
                     .HasConstraintName("COMMENTRAT_TRAVELER_FK");
             });
@@ -82,6 +93,17 @@ namespace Highway_to_heaven.Models
             {
                 entity.HasKey(e => e.Name)
                     .HasName("PLANET_PK");
+            });
+
+            modelBuilder.Entity<Question>(entity =>
+            {
+                entity.HasKey(e => e.IdQuestion)
+                    .HasName("PK__QUESTION__2BD9247777FAA439");
+
+                entity.HasOne(d => d.IdTourNavigation)
+                    .WithMany(p => p.Questions)
+                    .HasForeignKey(d => d.IdTour)
+                    .HasConstraintName("FK__QUESTION__id_tou__5CD6CB2B");
             });
 
             modelBuilder.Entity<Travel>(entity =>

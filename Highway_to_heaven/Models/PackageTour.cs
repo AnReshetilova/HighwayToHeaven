@@ -12,6 +12,7 @@ namespace Highway_to_heaven.Models
         public PackageTour()
         {
             Comments = new HashSet<Comment>();
+            Questions = new HashSet<Question>();
             Travels = new HashSet<Travel>();
         }
 
@@ -48,6 +49,8 @@ namespace Highway_to_heaven.Models
         public virtual Planet PlanetNameNavigation { get; set; }
         [InverseProperty("IdTourNavigation")]
         public virtual ICollection<Comment> Comments { get; set; }
+        [InverseProperty("IdTourNavigation")]
+        public virtual ICollection<Question> Questions { get; set; }
         [InverseProperty("IdTourNavigation")]
         public virtual ICollection<Travel> Travels { get; set; }
     }

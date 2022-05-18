@@ -43,5 +43,31 @@ namespace Highway_to_heaven.Services
         {
             return this.context.Planets.AsEnumerable();
         }
+
+        public IEnumerable<Question> GetQuestionsByTourId(int id)
+        {
+            return context.Questions.Where(t => t.IdTour == id).AsEnumerable();
+        }
+
+        public IEnumerable<Answer> GetAnswersBuQuestionId(int id)
+        {
+            return context.Answers.Where(t => t.IdQuestion == id).AsEnumerable();
+        }
+
+        public void AddNewTravel(Travel travel)
+        {
+            context.Travels.Add(travel);
+            context.SaveChanges();
+        }
+
+        public Travel GetTravelByUserTourId(string userId, int tourId)
+        {
+            return context.Travels.FirstOrDefault(t => t.IdTraveler.Equals(userId) && t.IdTour == tourId);
+        }
+
+        public IEnumerable<Travel> GetTravelByTourId(int tourId)
+        {
+            return context.Travels.Where(t => t.IdTour == tourId).AsEnumerable();
+        }
     }
 }

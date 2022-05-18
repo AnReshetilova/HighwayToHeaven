@@ -60,9 +60,11 @@ namespace Highway_to_heaven.ViewModels
         public ICommand OpenSettingsCommand { get; }
         public ICommand OpenAddPlanetCommand { get; }
         public ICommand OpenPlanetsInfoCommand { get; }
+        public ICommand OpenStatisticCommand { get; }
 
         public MainWindowViewModel(NavigationStore navigationStore, Func<ViewModel> createLoginViewModel, Func<ViewModel> createToursInfoViewModel, Func<ViewModel> createAccountViewModel,
-            Func<User> getUser, Func<ViewModel> createAddTourViewModel, Func<ViewModel> createSettingsViewModel, Func<ViewModel> createAddPlanetViewModel, Action<User> setUser, Func<ViewModel> createPlanetsViewModel)
+            Func<User> getUser, Func<ViewModel> createAddTourViewModel, Func<ViewModel> createSettingsViewModel, Func<ViewModel> createAddPlanetViewModel, Action<User> setUser, Func<ViewModel> createPlanetsViewModel,
+            Func<ViewModel> createStatisticsViewModel)
         {
             this.navigationStore = navigationStore;
 
@@ -74,6 +76,7 @@ namespace Highway_to_heaven.ViewModels
             OpenSettingsCommand = new NavigateCommand(this.navigationStore, createSettingsViewModel);
             OpenAddPlanetCommand = new NavigateCommand(this.navigationStore, createAddPlanetViewModel);
             OpenPlanetsInfoCommand = new NavigateCommand(this.navigationStore, createPlanetsViewModel);
+            OpenStatisticCommand = new NavigateCommand(this.navigationStore, createStatisticsViewModel);
 
             this.navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
             this.getUser = getUser;
