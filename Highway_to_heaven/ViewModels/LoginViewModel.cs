@@ -14,8 +14,8 @@ namespace Highway_to_heaven.ViewModels
 {
     class LoginViewModel : ViewModel
     {
-        private string username;
-        private string password;
+        private string username = "admin";
+        private string password = "admin";
         private string info;
         private User userInfo;
         private readonly UserService userService;
@@ -53,15 +53,19 @@ namespace Highway_to_heaven.ViewModels
 
         public ICommand LoginCommand { get; }
         public ICommand OpenRegistrationCommand { get; }
+        private ICommand openRegistrationCommand;
+        private ICommand openAccountViewModel;
 
-        public LoginViewModel(UserService userService, Action<User> setUser, NavigationStore navigationStore, Func<ViewModel> createRegistrationViewModel)
+        public LoginViewModel(UserService userService, Action<User> setUser, NavigationStore navigationStore, Func<ViewModel> createRegistrationViewModel, Func<ViewModel> createAccountViewModel)
         {
             this.userService = userService;
             this.userInfo = new User();
             this.setUser = setUser;
 
             LoginCommand = new ExternalCommand(onLoginCommandExecute);
-            OpenRegistrationCommand = new NavigateCommand(navigationStore, createRegistrationViewModel);
+            openRegistrationCommand = new NavigateCommand(navigationStore, createRegistrationViewModel);
+            openAccountViewModel = new NavigateCommand(navigationStore, createAccountViewModel);
+            OpenRegistrationCommand = new ExternalCommand(onOpenRegistrationCommand);
         }
 
         private void onLoginCommandExecute(object o)
@@ -77,6 +81,15 @@ namespace Highway_to_heaven.ViewModels
                 Info = "Excellent";
             }
             setUser(userInfo);
+
+            openAccountViewModel.Execute(o);
+        }
+
+        private void onOpenRegistrationCommand(object o)
+        {
+            setUser(null);
+            userInfo = null;
+            openRegistrationCommand.Execute(o);
         }
     }
 }

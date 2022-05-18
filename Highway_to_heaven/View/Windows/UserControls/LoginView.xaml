@@ -6,14 +6,15 @@
              xmlns:local="clr-namespace:Highway_to_heaven.View.Windows.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="850">
-
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="25"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\space\login.jpg" Stretch="UniformToFill" TileMode="None"></ImageBrush>
-        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="23*"></RowDefinition>
-            <RowDefinition Height="227*"></RowDefinition>
+            <RowDefinition Height="53*"></RowDefinition>
+            <RowDefinition Height="322*"></RowDefinition>
         </Grid.RowDefinitions>
         <Border Grid.Row="1" VerticalAlignment="Top" Height="409" HorizontalAlignment="Center" Width="274" BorderThickness="4"  Padding="4">
             <StackPanel Orientation="Vertical" Background="#FFE4E1E7">

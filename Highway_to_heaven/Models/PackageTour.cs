@@ -22,10 +22,6 @@ namespace Highway_to_heaven.Models
         [StringLength(30)]
         [Unicode(false)]
         public string PlanetName { get; set; }
-        [Column("tour_name")]
-        [StringLength(50)]
-        [Unicode(false)]
-        public string TourName { get; set; }
         [Column("number_of_days")]
         public int? NumberOfDays { get; set; }
         [Column("rating")]
@@ -38,6 +34,10 @@ namespace Highway_to_heaven.Models
         [StringLength(1000)]
         [Unicode(false)]
         public string Picture { get; set; }
+        [Column("tour_name")]
+        [StringLength(50)]
+        [Unicode(false)]
+        public string TourName { get; set; }
         [Column("second_picture")]
         [StringLength(1000)]
         [Unicode(false)]

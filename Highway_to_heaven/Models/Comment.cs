@@ -24,10 +24,6 @@ namespace Highway_to_heaven.Models
         [StringLength(500)]
         [Unicode(false)]
         public string TextComment { get; set; }
-        [Column("likes")]
-        public int? Likes { get; set; }
-        [Column("dislikes")]
-        public int? Dislikes { get; set; }
 
         [ForeignKey("IdTour")]
         [InverseProperty("Comments")]

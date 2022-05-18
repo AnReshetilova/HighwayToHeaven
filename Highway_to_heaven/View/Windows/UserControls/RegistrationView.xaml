@@ -22,9 +22,6 @@
     </UserControl.Resources>
     <Grid>
         <Grid>
-            <Grid.Background>
-                <ImageBrush ImageSource="D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\space\login.jpg" Stretch="UniformToFill" TileMode="None"></ImageBrush>
-            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="34*"></RowDefinition>
                 <RowDefinition Height="244*"></RowDefinition>

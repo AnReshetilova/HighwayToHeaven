@@ -10,19 +10,18 @@
         mc:Ignorable="d"
         Title="{Binding Title}" 
         Height="750" Width="850">
-    <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="FontFamily" Value="Play"/>
-            <Setter Property="BorderBrush" Value="DarkMagenta"/>
-            <Setter Property="Background" Value="White"/>
-        </Style>
-    </Window.Resources>
     <Grid >
         <Grid.Background>
             <ImageBrush ImageSource="D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\space\spaceLogin1.jpg" Stretch="UniformToFill"></ImageBrush>
         </Grid.Background>
         <Grid.Resources>
+            <Style TargetType="Expander">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"  Value="False">
+                        <Setter Property="IsExpanded" Value="False" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
             <DataTemplate DataType="{x:Type vms:LoginViewModel}">
                 <views:LoginView/>
             </DataTemplate>
@@ -50,38 +49,42 @@
             <DataTemplate DataType="{x:Type vms:CommentsViewModel}">
                 <views:CommentsView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:PlanetsViewModel}">
+                <views:PlanetsView/>
+            </DataTemplate>
         </Grid.Resources>
-        
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="161*"></RowDefinition>
+            <RowDefinition Height="171*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="113*"></ColumnDefinition>
-            <ColumnDefinition Width="269*"></ColumnDefinition>
-            <ColumnDefinition Width="468*"></ColumnDefinition>
+            <ColumnDefinition Width="737*"></ColumnDefinition>
+            <ColumnDefinition Width="0*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <ContentControl Content="{Binding CurrentViewModel}" Grid.Row= "1" Grid.RowSpan= "3" Grid.ColumnSpan="3" x:Name="ContentConrol"/>
+        <ContentControl Content="{Binding CurrentViewModel}" Grid.Row= "1" Grid.RowSpan= "2" Grid.ColumnSpan="2" x:Name="ContentConrol"/>
 
-        <Expander Grid.RowSpan="3" Grid.ColumnSpan="2"
-                  Header="Админ"
-                  FontSize="15"
-                  Margin="0,10,0,10"
-                  VerticalAlignment="Top"
-                  HorizontalAlignment="Left"
-                  Width="263" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
-            <TabControl>
-                <StackPanel Orientation="Vertical" Background="White">
-                    <Button Margin ="0,3,0,0" Height ="25" Content="Аккаунт" Command="{Binding OpenAccountInfoCommand}"/>
-                    <Button Margin ="0,3,0,0" Height ="25" Content="Настройки" Command="{Binding OpenSettingsCommand}"/>
-                    <Button Margin ="0,3,0,0" Height ="25" Content="Путешествия" Command="{Binding OpenToursInfoCommand}"/>
-                    <Button Margin ="0,3,0,0" Height ="25" Content="Добавление путешествия" Command="{Binding OpenAddTourCommand}"/>
-                    <Button Margin ="0,3,0,0" Height ="25" Content="Добавление планеты" Command="{Binding OpenAddPlanetCommand}"/>
-                    <Button Margin ="0,3,0,0" Height ="25" Content="Выход" Command="{Binding OpenLoginCommand}"/>
-                </StackPanel>
-            </TabControl>
-        </Expander>
+        <StackPanel Orientation="Horizontal"  Grid.ColumnSpan="2" Grid.Column="0" Visibility="{Binding ViewMenu}">
+            <Button  Content="Аккаунт" Command="{Binding OpenAccountInfoCommand}" />
+            <Button Content="Настройки" Command="{Binding OpenSettingsCommand}"/>
+            <Button  Content="Путешествия" Command="{Binding OpenToursInfoCommand}"/>
+            <Button  Command="{Binding OpenAddTourCommand}" Visibility="{Binding AdminFunction}">
+                <TextBlock TextAlignment="Center">Добавление<LineBreak/>путешествия</TextBlock>
+            </Button>
+            <Button  Command="{Binding OpenStatisticCommand}" Visibility="{Binding UserFunction}">
+                <TextBlock TextAlignment="Center">Просмотр<LineBreak/>статистики</TextBlock>
+            </Button>
+            <Button Command="{Binding OpenAddPlanetCommand}" Visibility="{Binding AdminFunction}">
+                <TextBlock TextAlignment="Center" >Добавление<LineBreak/>планеты</TextBlock>
+            </Button>
+            <Button  Command="{Binding OpenPlanetsInfoCommand}" Visibility="{Binding UserFunction}">
+                <TextBlock TextAlignment="Center">Планеты</TextBlock>
+            </Button>
+            <Button Content="Выход" Command="{Binding OpenLoginCommand}"/>
+        </StackPanel>
+
     </Grid>
 </Window>

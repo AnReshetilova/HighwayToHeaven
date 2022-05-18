@@ -36,14 +36,43 @@ namespace Highway_to_heaven.Services
         {
             return this.context.Comments.Where(t => t.IdTour.Equals(id)).AsEnumerable();
         }
+
         public IEnumerable<User> GetUserList()
         {
             return context.Users.AsEnumerable();
         }
 
-        public void IncreaseCommentLikes(int id)
+        public IEnumerable<CommentRating> FindRatingByIdComment(int id)
         {
-            context.Comments.FirstOrDefault(t => t.IdComment.Equals(id)).Likes++;
+            return context.CommentRatings.Where(t => t.IdComment == id);
+        }
+
+        public Comment FindCommentById(int id)
+        {
+            return context.Comments.FirstOrDefault(t => t.IdComment == id);
+        }
+
+        public bool AddRaiting(Comment comment, User user, bool liked, bool disliked)
+        {
+            if (context.CommentRatings.Any(t => (t.IdComment == comment.IdComment && t.IdUser == user.Login)))
+            {
+                return false;
+            }
+
+            CommentRating rating = new CommentRating();
+            rating.IdComment = comment.IdComment;
+            rating.IdUser = user.Login;
+            rating.Liked = liked;
+            rating.Disliked = disliked;
+            context.CommentRatings.Add(rating);
+            context.SaveChanges();
+            return true;
+        }
+
+        public void AddComment (Comment comment)
+        {
+            comment.IdComment = context.Comments.Count() + 1;
+            context.Comments.Add(comment);
             context.SaveChanges();
         }
     }

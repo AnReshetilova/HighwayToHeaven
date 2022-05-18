@@ -38,7 +38,7 @@ namespace Highway_to_heaven.Models
         [Unicode(false)]
         public string Description { get; set; }
         [Column("picture")]
-        [StringLength(70)]
+        [StringLength(1000)]
         [Unicode(false)]
         public string Picture { get; set; }
 

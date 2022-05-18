@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="./View/Themes/DarkMagentaTheme.xaml" />
                 <ResourceDictionary Source="./View/Language/Russian.xaml" />
                 <ResourceDictionary Source="./View/Templates/Comment.xaml" />
+                <ResourceDictionary Source="./View/Templates/Planet.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -34,12 +34,12 @@ namespace Highway_to_heaven.Models
         [StringLength(30)]
         [Unicode(false)]
         public string Address { get; set; }
-        [Column("picture")]
-        [StringLength(70)]
-        [Unicode(false)]
-        public string Picture { get; set; }
         [Column("is_admin")]
         public bool? IsAdmin { get; set; }
+        [Column("picture")]
+        [StringLength(1000)]
+        [Unicode(false)]
+        public string Picture { get; set; }
 
         [InverseProperty("IdTravelerNavigation")]
         public virtual ICollection<Comment> Comments { get; set; }

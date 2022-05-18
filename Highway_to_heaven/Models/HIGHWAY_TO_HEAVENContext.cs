@@ -16,8 +16,8 @@ namespace Highway_to_heaven.Models
         {
         }
 
-        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<CommentRating> CommentRatings { get; set; }
         public virtual DbSet<PackageTour> PackageTours { get; set; }
         public virtual DbSet<Planet> Planets { get; set; }
         public virtual DbSet<Travel> Travels { get; set; }
@@ -34,12 +34,6 @@ namespace Highway_to_heaven.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Admin>(entity =>
-            {
-                entity.HasKey(e => e.Login)
-                    .HasName("ADMIN_PK");
-            });
-
             modelBuilder.Entity<Comment>(entity =>
             {
                 entity.HasKey(e => e.IdComment)
@@ -56,6 +50,21 @@ namespace Highway_to_heaven.Models
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.IdTraveler)
                     .HasConstraintName("COMMENT_TRAVELER_FK");
+            });
+
+            modelBuilder.Entity<CommentRating>(entity =>
+            {
+                entity.Property(e => e.RatingId).ValueGeneratedOnAdd();
+
+                entity.HasOne(d => d.IdCommentNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.IdComment)
+                    .HasConstraintName("FK__COMMENT_R__id_co__4BAC3F29");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.IdUser)
+                    .HasConstraintName("COMMENTRAT_TRAVELER_FK");
             });
 
             modelBuilder.Entity<PackageTour>(entity =>

@@ -1,6 +1,7 @@
 ﻿using Highway_to_heaven.Commands;
 using Highway_to_heaven.Models;
 using Highway_to_heaven.Services;
+using Highway_to_heaven.Stores;
 using Highway_to_heaven.ViewModels.Base;
 using Microsoft.Win32;
 using System;
@@ -62,11 +63,13 @@ namespace Highway_to_heaven.ViewModels
 
         public ICommand RegistrationCommand { get; }
         public ICommand AddAvatarCommand { get; }
-        public RegistrationViewModel(UserService userService)
+        private ICommand openLoginViewModel { get; }
+        public RegistrationViewModel(UserService userService, NavigationStore navigationStore, Func<ViewModel> createLoginViewModel)
         {
             this.userService = userService;
             RegistrationCommand = new ExternalCommand(OnRegistrationCommand);
             AddAvatarCommand = new ExternalCommand(OnAddAvatarCommand);
+            openLoginViewModel = new NavigateCommand(navigationStore, createLoginViewModel);
         }
         public void OnAddAvatarCommand(object o)
         {
@@ -93,6 +96,7 @@ namespace Highway_to_heaven.ViewModels
             {
                 Info = "Excellent";
             }
+            openLoginViewModel.Execute(o);
         }
     }
 }

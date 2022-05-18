@@ -38,5 +38,10 @@ namespace Highway_to_heaven.Services
             this.context.Planets.Add(planet);
             context.SaveChanges();
         }
+
+        public IEnumerable<Planet> GetPlanets()
+        {
+            return this.context.Planets.AsEnumerable();
+        }
     }
 }

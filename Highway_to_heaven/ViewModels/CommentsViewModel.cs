@@ -15,18 +15,21 @@ namespace Highway_to_heaven.ViewModels
 {
     class CommentsViewModel : ViewModel
     {
-        private ObservableCollection<Comment> comments;
-        private bool canLike = true;
+        private ObservableCollection<CommentTemplate> commentsTemplates;
         private string likes;
         private string dislikes;
+        private string currentComment;
+        private string isLiked = "0,0,0,0";
+        private string isDisliked = "0,0,0,0";
         private readonly UserService userService;
         private readonly ObservableCollection<User> users;
         private readonly PackageTour packageTour;
+        private User user;
 
-        public bool CanLike
+        public string CurrentComment
         {
-            get => canLike;
-            set => Set(ref canLike, value);
+            get => currentComment;
+            set => Set(ref currentComment, value);
         }
         public string Likes
         {
@@ -38,27 +41,89 @@ namespace Highway_to_heaven.ViewModels
             get => dislikes;
             set => Set(ref dislikes, value);
         }
-        public ObservableCollection<Comment> Comments
+        public string IsLiked
         {
-            get => comments;
+            get => isLiked;
+            set => Set(ref isLiked, value);
+        }
+        public string IsDisliked
+        {
+            get => isDisliked;
+            set => Set(ref isDisliked, value);
+        }
+        public ObservableCollection<CommentTemplate> Comments
+        {
+            get => commentsTemplates;
         }
 
         public ICommand LikeCommand { get; }
+        public ICommand DislikeCommand { get; }
+        public ICommand AddCommand { get; set; }
 
-        public CommentsViewModel(UserService userService, PackageTour packageTour)
+        public CommentsViewModel(UserService userService, PackageTour packageTour, User user)
         {
-            comments = new ObservableCollection<Comment>(userService.GetCommentsCollectionByTourId(packageTour.IdTour));
             users = new ObservableCollection<User>(userService.GetUserList());
+            commentsTemplates = new ObservableCollection<CommentTemplate>();
+            ObservableCollection<Comment> comments = new ObservableCollection<Comment>(userService.GetCommentsCollectionByTourId(packageTour.IdTour));
+            foreach (var el in comments)
+            {
+                commentsTemplates.Add(new CommentTemplate(el, userService));  
+            }
+
+            this.user = user;
             this.packageTour = packageTour;
             LikeCommand = new ExternalCommand(onLikeCommand);
+            DislikeCommand = new ExternalCommand(onDislikeCommand);
+            AddCommand = new ExternalCommand(onAddCommand);
             this.userService = userService;
         }
 
+        private void onAddCommand (object o)
+        {
+            Comment comment = new Comment();
+            comment.DateComment = DateTime.Now;
+            comment.IdTour = packageTour.IdTour;
+            comment.IdTraveler = user.Login;
+            comment.TextComment = currentComment;
+            userService.AddComment(comment);
+            Refresh();
+        }
         private void onLikeCommand(object o)
         {
-            userService.IncreaseCommentLikes((o as Comment).IdComment);
-            comments = new ObservableCollection<Comment>(userService.GetCommentsCollectionByTourId(packageTour.IdTour));
-            CanLike = false;
+            Comment comment = userService.FindCommentById((o as CommentTemplate).Id);
+
+            if (!userService.AddRaiting(comment, user, true, false))
+            {
+                MessageBox.Show("Вы уже оценили комментарий!");
+            }
+            else
+            {
+                Refresh();
+            }
+        }
+
+        private void onDislikeCommand(object o)
+        {
+            Comment comment = userService.FindCommentById((o as CommentTemplate).Id);
+
+            if (!userService.AddRaiting(comment, user, false, true))
+            {
+                MessageBox.Show("Вы уже оценили комментарий!");
+            }
+            else
+            {
+                Refresh();
+            }
+        }
+
+        private void Refresh()
+        {
+            commentsTemplates.Clear();
+            ObservableCollection<Comment> comments = new ObservableCollection<Comment>(userService.GetCommentsCollectionByTourId(packageTour.IdTour));
+            foreach (var el in comments)
+            {
+                commentsTemplates.Add(new CommentTemplate(el, userService));
+            }
         }
     }
 }

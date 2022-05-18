@@ -6,35 +6,48 @@
              xmlns:local="clr-namespace:Highway_to_heaven.View.Windows.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="850">
-    
+
     <Grid>
-       
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="39*"></ColumnDefinition>
             <ColumnDefinition Width="354*"></ColumnDefinition>
             <ColumnDefinition Width="32*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="89*"></RowDefinition>
-            <RowDefinition Height="475*"></RowDefinition>
-            <RowDefinition Height="186*"></RowDefinition>
+            <RowDefinition Height="57*"></RowDefinition>
+            <RowDefinition Height="443*"></RowDefinition>
+            <RowDefinition Height="250*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-            <ItemsControl  x:Name="PictureList" ItemsSource="{Binding Comments}">
-                <ItemsControl.Resources>
+        <StackPanel Orientation="Vertical"  Grid.Row="1" Grid.Column="1" Height="400" VerticalAlignment="Center">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" MaxHeight="400">
+                <ItemsControl  x:Name="PictureList" ItemsSource="{Binding Comments}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Template="{DynamicResource Comment}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2"  VerticalAlignment="Top" Height="170" Margin="0,0,20,0" Width="660">
+            <TextBox HorizontalAlignment="Right" Width="460" Height="70" Margin="50" Text="{Binding CurrentComment, UpdateSourceTrigger=PropertyChanged}" BorderBrush = "DarkMagenta" Background="{x:Null}" Foreground="White"/>
+            <Border HorizontalAlignment="Right"
 
-                </ItemsControl.Resources>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl Template="{DynamicResource Comment}"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                            Width="100" Height="100"
+                         BorderThickness="2"
+                    CornerRadius="200">
+                <TextBlock Text="Добавить" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Play" Foreground="White"/>
+                <Border.InputBindings>
+                    <MouseBinding Command ="{Binding AddCommand}"
+                                      MouseAction="LeftClick"/>
+                </Border.InputBindings>
+            </Border>
+        </StackPanel>
     </Grid>
 </UserControl>
