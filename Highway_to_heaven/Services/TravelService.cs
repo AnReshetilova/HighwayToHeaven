@@ -27,16 +27,27 @@ namespace Highway_to_heaven.Services
             return this.context.PackageTours.Where(t => t.PlanetName.Contains(name)).AsEnumerable();
         }
 
+        public IEnumerable<Planet> GetPlanetsByName(string name)
+        {
+            return this.context.Planets.Where(t => t.Name.Contains(name)).AsEnumerable();
+        }
+
         public void AddNewTour(PackageTour packageTour)
         {
             this.context.PackageTours.Add(packageTour);
             context.SaveChanges();
         }
 
-        public void AddNewPlanet(Planet planet)
+        public bool AddNewPlanet(Planet planet)
         {
+            if (GetPlanetByName(planet.Name) != null)
+            {
+                return false;
+            }
+
             this.context.Planets.Add(planet);
             context.SaveChanges();
+            return true;
         }
 
         public IEnumerable<Planet> GetPlanets()
@@ -68,6 +79,11 @@ namespace Highway_to_heaven.Services
         public IEnumerable<Travel> GetTravelByTourId(int tourId)
         {
             return context.Travels.Where(t => t.IdTour == tourId).AsEnumerable();
+        }
+
+        public Planet GetPlanetByName(string name)
+        {
+            return context.Planets.FirstOrDefault(t => t.Name == name);
         }
     }
 }

@@ -31,7 +31,7 @@
             <RowDefinition Height="235*"></RowDefinition>
             <RowDefinition Height="56*"></RowDefinition>
         </Grid.RowDefinitions>
-
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Info}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" Visibility="{Binding Journey, UpdateSourceTrigger=PropertyChanged}">
             <StackPanel Width="450" Height="350" >
                 <TextBlock Text="{Binding Question, UpdateSourceTrigger=PropertyChanged}" Height="60" TextWrapping="Wrap" />

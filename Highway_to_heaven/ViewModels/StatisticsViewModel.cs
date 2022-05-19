@@ -29,6 +29,8 @@ namespace Highway_to_heaven.ViewModels
             {
                 statisticsTemplates.Add(new StatisticsTemplate(el, userService));
             }
+
+            statisticsTemplates = new ObservableCollection<StatisticsTemplate>(statisticsTemplates.OrderByDescending(t => t.Score));
         }
     }
 }

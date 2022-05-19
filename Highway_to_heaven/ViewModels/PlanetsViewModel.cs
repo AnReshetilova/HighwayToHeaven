@@ -14,6 +14,7 @@ namespace Highway_to_heaven.ViewModels
     {
         private ObservableCollection<Planet> planets;
         private TravelService travelService;
+        private string searchText;
         public ObservableCollection<Planet> Planets
         {
             get => planets;
@@ -22,6 +23,23 @@ namespace Highway_to_heaven.ViewModels
         {
             this.travelService = travelService;
             planets = new ObservableCollection<Planet>(travelService.GetPlanets());
+        }
+
+        public string SearchText
+        {
+            get => searchText;
+            set
+            {
+                if (value == "")
+                {
+                    planets = new ObservableCollection<Planet>(travelService.GetPlanets());
+                }
+                else
+                {
+                    planets = new ObservableCollection<Planet>(travelService.GetPlanetsByName(value));
+                }
+                Set(ref searchText, value);
+            }
         }
     }
 }

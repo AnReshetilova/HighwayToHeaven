@@ -24,15 +24,21 @@ namespace Highway_to_heaven.Models
         [Unicode(false)]
         public string PlanetarySystem { get; set; }
         [Column("surface_area")]
-        public double? SurfaceArea { get; set; }
+        [StringLength(30)]
+        [Unicode(false)]
+        public string SurfaceArea { get; set; }
         [Column("sidereal_rotation_period")]
         [StringLength(30)]
         [Unicode(false)]
         public string SiderealRotationPeriod { get; set; }
         [Column("min_temp")]
-        public double? MinTemp { get; set; }
+        [StringLength(10)]
+        [Unicode(false)]
+        public string MinTemp { get; set; }
         [Column("max_temp")]
-        public double? MaxTemp { get; set; }
+        [StringLength(10)]
+        [Unicode(false)]
+        public string MaxTemp { get; set; }
         [Column("description")]
         [StringLength(1000)]
         [Unicode(false)]

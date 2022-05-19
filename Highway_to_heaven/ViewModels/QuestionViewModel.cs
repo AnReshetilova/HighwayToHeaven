@@ -17,6 +17,7 @@ namespace Highway_to_heaven.ViewModels
         private const int MAX_QUESTION_COUNT = 4;
 
         private string question;
+        private string info;
         private ObservableCollection<Question> questions;
         private ObservableCollection<Answer> answers;
         private int questionNumber = 0;
@@ -30,6 +31,11 @@ namespace Highway_to_heaven.ViewModels
         private string journey = "Visible";
         private string journeyResult = "Collapsed";
 
+        public string Info
+        {
+            get => info;
+            set => Set(ref info, value);
+        }
         public string JourneyResult
         {
             get => journeyResult;
@@ -92,18 +98,27 @@ namespace Highway_to_heaven.ViewModels
 
         private void onNextCommand(object o)
         {
-            if (checkedAnswer.IdAnswer == answers.FirstOrDefault(t => t.IsCorrect == true).IdAnswer)
-            {
-                score++;
-            }
-            questionNumber++;
-            Question = Questions[questionNumber].Question1;
-            Answers = new ObservableCollection<Answer>(travelService.GetAnswersBuQuestionId(Questions[questionNumber].IdQuestion));
 
-            if (questionNumber >= MAX_QUESTION_COUNT)
+            if (checkedAnswer == null)
             {
-                NextQuestion = "Collapsed";
-                Result = "Visible";
+                Info = "Ни один вариант не выбран";
+            }
+            else
+            {
+                Info = "";
+                if (checkedAnswer.IdAnswer == answers.FirstOrDefault(t => t.IsCorrect == true).IdAnswer)
+                {
+                    score++;
+                }
+                questionNumber++;
+                Question = Questions[questionNumber].Question1;
+                Answers = new ObservableCollection<Answer>(travelService.GetAnswersBuQuestionId(Questions[questionNumber].IdQuestion));
+
+                if (questionNumber >= MAX_QUESTION_COUNT)
+                {
+                    NextQuestion = "Collapsed";
+                    Result = "Visible";
+                }
             }
         }
 
@@ -114,18 +129,26 @@ namespace Highway_to_heaven.ViewModels
 
         private void onResultCommand(object o)
         {
-            if (checkedAnswer.IdAnswer == answers.FirstOrDefault(t => t.IsCorrect == true).IdAnswer)
+            if (checkedAnswer == null)
             {
-                score++;
+                Info = "Ни один вариант не выбран";
             }
-            Journey = "Collapsed";
-            JourneyResult = "Visible";
+            else
+            {
+                Info = "";
+                if (checkedAnswer.IdAnswer == answers.FirstOrDefault(t => t.IsCorrect == true).IdAnswer)
+                {
+                    score++;
+                }
+                Journey = "Collapsed";
+                JourneyResult = "Visible";
 
-            Travel travel = new Travel();
-            travel.IdTour = packageTour.IdTour;
-            travel.IdTraveler = user.Login;
-            travel.Score = score;
-            travelService.AddNewTravel(travel);
+                Travel travel = new Travel();
+                travel.IdTour = packageTour.IdTour;
+                travel.IdTraveler = user.Login;
+                travel.Score = score;
+                travelService.AddNewTravel(travel);
+            }
         }
     }
 }

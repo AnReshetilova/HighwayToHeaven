@@ -12,14 +12,13 @@ namespace Highway_to_heaven.ViewModels
 {
     class SettingsViewModel : ViewModel
     {
-        public ICommand SetDarkMagentaThemeCommand { get; set; }
-        public ICommand SetDarkCyanThemeCommand { get; }
+        public ICommand SetThemeCommand { get; set; }
         public SettingsViewModel()
         {
-            SetDarkCyanThemeCommand = new ExternalCommand(OnSetDarkCyanThemeCommand);
+            SetThemeCommand = new ExternalCommand(onSetThemeCommand);
         }
 
-        private void OnSetDarkCyanThemeCommand(object o)
+        private void onSetThemeCommand(object o)
         {
             string theme = o as string;
             switch (theme)
@@ -27,6 +26,11 @@ namespace Highway_to_heaven.ViewModels
                 case "cyan":
                     {
                         Application.Current.Resources.MergedDictionaries[1].Source = new Uri("./View/Themes/DarkCyanTheme.xaml", UriKind.RelativeOrAbsolute);
+                        break;
+                    }
+                case "magenta":
+                    {
+                        Application.Current.Resources.MergedDictionaries[1].Source = new Uri("./View/Themes/DarkMagentaTheme.xaml", UriKind.RelativeOrAbsolute);
                         break;
                     }
                 default:

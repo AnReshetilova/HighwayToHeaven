@@ -15,7 +15,7 @@
             </Border>
             <StackPanel Orientation="Vertical" Margin="10" Width="350">
                 <TextBlock Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="{Binding Discription, UpdateSourceTrigger=PropertyChanged}" Height="50"/>
+                <TextBlock Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Height="50" TextWrapping="Wrap"/>
                 <DockPanel Width="300">
                     <TextBlock DockPanel.Dock="Left" Text="{Binding Date}"/>
                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment ="Right">

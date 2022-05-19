@@ -16,7 +16,7 @@ namespace Highway_to_heaven.Models
 
         public string Username { get; set; }
         public DateTime? Date { get; set; }
-        public string Discription {get; set; }
+        public string Description {get; set; }
         public int Likes { get; set; }
         public int Dislikes { get; set; }
         public string Picture { get; set; }
@@ -31,7 +31,7 @@ namespace Highway_to_heaven.Models
             Username = user.Name;
             Picture = user.Picture;
             Date = comment.DateComment;
-            Discription = comment.TextComment;
+            Description = comment.TextComment;
             Likes = commentRating.Count(t => t.Liked == true);
             Dislikes = commentRating.Count(t => t.Disliked == true);
         }

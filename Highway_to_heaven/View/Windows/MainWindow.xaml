@@ -9,7 +9,9 @@
         xmlns:views="clr-namespace:Highway_to_heaven.View.Windows.UserControls"
         mc:Ignorable="d"
         Title="{Binding Title}" 
-        Height="750" Width="850">
+        Height="750" Width="850"
+        MaxHeight="750" MaxWidth="850"
+        MinHeight="750" MinWidth="850">
     <Grid >
         <Grid.Background>
             <ImageBrush ImageSource="D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\space\spaceLogin1.jpg" Stretch="UniformToFill"></ImageBrush>

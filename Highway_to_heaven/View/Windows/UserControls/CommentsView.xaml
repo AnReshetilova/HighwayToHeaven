@@ -36,7 +36,9 @@
             </ScrollViewer>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2"  VerticalAlignment="Top" Height="170" Margin="0,0,20,0" Width="660">
-            <TextBox HorizontalAlignment="Right" Width="460" Height="70" Margin="50" Text="{Binding CurrentComment, UpdateSourceTrigger=PropertyChanged}" BorderBrush = "DarkMagenta" Background="{x:Null}" Foreground="White"/>
+            <Border  HorizontalAlignment="Right" Width="460" Height="70" Margin="70,50,20,50" BorderThickness="2">
+                <TextBox Text="{Binding CurrentComment, UpdateSourceTrigger=PropertyChanged}" Background="{x:Null}" Foreground="White" BorderThickness="0" MaxLength="200" TextWrapping="Wrap"/>
+            </Border>
             <Border HorizontalAlignment="Right"
 
                             Width="100" Height="100"

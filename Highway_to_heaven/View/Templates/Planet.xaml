@@ -9,23 +9,33 @@
                 <Setter Property="FontFamily" Value="Play"/>
             </Style>
         </ControlTemplate.Resources>
-        <StackPanel Grid.Row="1" Grid.Column="1" Width="280" Height="150">
-            <StackPanel Orientation="Horizontal">
-                <Border BorderThickness="1" BorderBrush="White" Margin="5" Width="110" Height="110">
-                    <Image  Source="{Binding Picture, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform"/>
-                </Border>
-                <StackPanel Orientation="Vertical" Margin="15,0,0,0">
-                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Text ="{Binding PlanetarySystem, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Text ="{Binding SiderealRotationPeriod, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Text ="{Binding NumberOFDays, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Text="Температура" HorizontalAlignment="Center"/>
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Left" Text ="{Binding MinTemp, UpdateSourceTrigger=PropertyChanged}" Width="64" />
-                        <TextBlock DockPanel.Dock="Right" Text ="{Binding MaxTemp, UpdateSourceTrigger=PropertyChanged}" Width="64" HorizontalAlignment="Right"/>
-                    </DockPanel>
+        <Border BorderThickness="2,2,1,1" Padding="10" Margin="0,0,0,10">
+            <StackPanel Grid.Row="1" Grid.Column="1" Width="400">
+                <StackPanel Orientation="Horizontal">
+                    <Border BorderThickness="1" BorderBrush="White" Margin="5" Width="170" Height="170">
+                        <Image  Source="{Binding Picture, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
+                    </Border>
+                    <StackPanel Orientation="Vertical" Margin="10,0,0,0" Width="200">
+                        <TextBlock Text="Название:" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"/>
+                        <TextBlock Text="Планетарная система:" Margin="0,0,0,5"/>
+                        <TextBlock Text ="{Binding PlanetarySystem, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Right"/>
+                        <TextBlock Text="Период обращения:" Margin="0,0,0,5"/>
+                        <TextBlock Text ="{Binding SiderealRotationPeriod, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Right"/>
+                        <TextBlock Text="Площадь:" Margin="0,0,0,5"/>
+                        <TextBlock Text ="{Binding SurfaceArea, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Right"/>
+                    </StackPanel>
                 </StackPanel>
+                <TextBlock Text="Температура" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Left" Text ="Мин. : "/>
+                    <TextBlock DockPanel.Dock="Left" Text ="{Binding MinTemp, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock DockPanel.Dock="Right" Text ="{Binding MaxTemp, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"/>
+                    <TextBlock DockPanel.Dock="Right" Text ="Макс. : " HorizontalAlignment="Right"/>
+                </DockPanel>
+                <TextBlock Text="Описание:" Margin="0,0,0,5" TextAlignment="Center"/>
+                <TextBlock Text ="{Binding Description, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MaxWidth="400" TextAlignment="Justify"/>
             </StackPanel>
-        </StackPanel>
+        </Border>
     </ControlTemplate>
 </ResourceDictionary>

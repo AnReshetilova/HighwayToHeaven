@@ -5,6 +5,7 @@ using Highway_to_heaven.ViewModels.Base;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,56 +17,80 @@ namespace Highway_to_heaven.ViewModels
     {
         private PackageTour packageTour;
         private readonly TravelService travelService;
-        private string tourName;
-        private string planetName;
-        private string numberOFDays;
-        private string discription;
-        private string raiting;
-        private string picturePath;
+        private ObservableCollection<Planet> planets;
+        private string tourName = "";
+        private string planetName = "";
+        private string discription = "";
         private string secondImage = @"D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\planet.png";
         private string firstImage = @"D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\planet.png";
+        private string info;
 
+        public ObservableCollection<Planet> Planets
+        {
+            get => planets;
+        }
+        public string Info
+        {
+            get => info;
+            set => Set(ref info, value);
+        }
         public string SecondImage
         {
             get => secondImage;
-            set => Set(ref secondImage, value);
+            set
+            {
+                if (value.Equals(""))
+                {
+                    secondImage = @"D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\planet.png";
+                }
+                else
+                {
+                    Set(ref secondImage, value);
+                }
+            }
         }
         public string FirstImage
         {
             get => firstImage;
-            set => Set(ref firstImage, value);
+            set
+            {
+                if (value.Equals(""))
+                {
+                    firstImage = @"D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\planet.png";
+                }
+                else
+                {
+                    Set(ref firstImage, value);
+                }
+            }
         }
         public string TourName
         {
             get => tourName;
             set => Set(ref tourName, value);
         }
-        public string PicturePath
-        {
-            get => picturePath;
-            set => Set(ref picturePath, value);
-        }
         public string PlanetName
         {
             get => planetName;
-            set => Set(ref planetName, value);
+            set
+            {
+                if (planets.FirstOrDefault(t => t.Name.Equals(value)) != null)
+                {
+                    Set(ref planetName, value);
+                    Info = "";
+                }
+                else 
+                {
+                    Set(ref planetName, value);
+                    Info = "Такой планеты нет";
+                }
+            }
         }
-        public string NumberOFDays
-        {
-            get => numberOFDays;
-            set => Set(ref numberOFDays, value);
-        }
-        public string Discription
+        public string Description
         {
             get => discription;
             set => Set(ref discription, value);
         }
-        public string Raiting
-        {
-            get => raiting;
-            set => Set(ref raiting, value);
-        }
-
         public ICommand AddSecondPictureCommand{ get; }
         public ICommand AddFirstPictureCommand { get; }
         public ICommand AddCommand { get; }
@@ -75,6 +100,7 @@ namespace Highway_to_heaven.ViewModels
             AddSecondPictureCommand = new ExternalCommand(OnAddSecondPictureCommand);
             AddFirstPictureCommand = new ExternalCommand(OnAddFirstPictureCommand);
             AddCommand = new ExternalCommand(OnAddCommand);
+            planets = new ObservableCollection<Planet>(travelService.GetPlanets());
         }
 
         private void OnAddSecondPictureCommand(object o)
@@ -91,14 +117,28 @@ namespace Highway_to_heaven.ViewModels
         private void OnAddCommand(object o)
         {
             packageTour = new PackageTour();
-            packageTour.NumberOfDays = Convert.ToInt32(numberOFDays);
             packageTour.PlanetName = planetName;
-            packageTour.Rating = (float)Convert.ToDouble(raiting);
             packageTour.TourName = tourName;
             packageTour.Description = discription;
             packageTour.Picture = firstImage;
             packageTour.SecondPicture = secondImage;
-            travelService.AddNewTour(packageTour);
+
+            if (planetName.Equals("") || tourName.Equals("") || discription.Equals(""))
+            {
+                Info = "Не все поля заполнены";
+            }           
+            else
+            {
+                if (planets.FirstOrDefault(t => t.Name.Equals(planetName)) != null)
+                {
+                    travelService.AddNewTour(packageTour);
+                    Info = "Путешествие добавлено";
+                }
+                else
+                {
+                    Info = "Такой планеты нет";
+                }
+            }
         }
     }
 }

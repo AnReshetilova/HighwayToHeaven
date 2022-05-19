@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Highway_to_heaven.Services;
 using Highway_to_heaven.Models;
 using Highway_to_heaven.Stores;
+using System.Security.Cryptography;
 
 namespace Highway_to_heaven.ViewModels
 {
@@ -72,17 +73,19 @@ namespace Highway_to_heaven.ViewModels
         {
             userInfo = userService.GetUserByLogin(username);
 
-            if (userInfo == null)
+            MD5 passwordHasher = MD5.Create();
+            password = Convert.ToBase64String(passwordHasher.ComputeHash(Encoding.UTF8.GetBytes(Password)));
+
+            if (userInfo == null || !userInfo.Password.Equals(password))
             {
                 Info = "Not correct";
             }
-            else if (userInfo.Password.Equals(password))
+            else
             {
                 Info = "Excellent";
-            }
-            setUser(userInfo);
-
-            openAccountViewModel.Execute(o);
+                setUser(userInfo);
+                openAccountViewModel.Execute(o);
+            }   
         }
 
         private void onOpenRegistrationCommand(object o)

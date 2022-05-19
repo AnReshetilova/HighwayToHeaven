@@ -7,6 +7,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -53,12 +54,33 @@ namespace Highway_to_heaven.ViewModels
         public string Age
         {
             get => age;
-            set => Set(ref age, value);
+            set
+            {
+                if ((!int.TryParse(value, out int temp) && !value.Equals("")) || Convert.ToInt32(value) > 100)
+                {
+                    Info = "Неверный формат возраста";
+                }
+                else
+                {
+                    Set(ref age, value);
+                    Info = ""; 
+                }
+            }
         }
         public string Avatar
         {
             get => avatar;
-            set => Set(ref avatar, value);
+            set
+            {
+                if (value.Equals(""))
+                {
+                    avatar = @"D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\astronaut.jpg";
+                }
+                else
+                {
+                    Set(ref avatar, value);
+                }
+            }
         }
 
         public ICommand RegistrationCommand { get; }
@@ -80,14 +102,18 @@ namespace Highway_to_heaven.ViewModels
         }
         public void OnRegistrationCommand(object o)
         {
+            MD5 passwordHasher = MD5.Create();
+            password = Convert.ToBase64String(passwordHasher.ComputeHash(Encoding.UTF8.GetBytes(Password)));
+
             user = new User();
             user.Login = login;
             user.Password = password;
             user.Name = username;
             user.Address = address;
             user.Age = Convert.ToInt32(age);
-            user.Picture = user.Picture;
+            user.Picture = avatar;
             user.IsAdmin = false;
+
             if (!userService.AddNewUser(user))
             {
                 Info = "Wrong login!";

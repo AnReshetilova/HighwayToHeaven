@@ -19,9 +19,9 @@
         <Border Grid.Row="1" VerticalAlignment="Top" Height="409" HorizontalAlignment="Center" Width="274" BorderThickness="4"  Padding="4">
             <StackPanel Orientation="Vertical" Background="#FFE4E1E7">
                 <TextBlock Text="Логин" FontSize="40" HorizontalAlignment="Center" Margin="0,15,0,0" FontFamily="Play"/>
-                <TextBox Text="{Binding Username , UpdateSourceTrigger=PropertyChanged}" Height="40" Margin="5" />
+                <TextBox Text="{Binding Username , UpdateSourceTrigger=PropertyChanged}" Height="40" Margin="5" MaxLength="20" />
                 <TextBlock Text="Пароль" FontSize="40" HorizontalAlignment="Center" FontFamily="Play"/>
-                <TextBox Text ="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Height="40" Margin="5"/>
+                <TextBox Text ="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Height="40" Margin="5" MaxLength="20"/>
                 <Border 
                              Margin="0,30,0,0"
                             Width="120" Height="120"

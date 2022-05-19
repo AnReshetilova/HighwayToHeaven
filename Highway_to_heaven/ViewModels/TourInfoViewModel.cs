@@ -84,7 +84,7 @@ namespace Highway_to_heaven.ViewModels
             createCommentViewModelCommand = new NavigateCommand(navigationStore, createCommentsViewModel);
             createQuestionViewModelCommand = new NavigateCommand(navigationStore, createQuestionViewModel);
 
-            if (travelService.GetTravelByUserTourId(user.Login, packageTour.IdTour) != null || travelService.GetTravelByTourId(packageTour.IdTour).Count() == 0)
+            if (travelService.GetTravelByUserTourId(user.Login, packageTour.IdTour) != null || travelService.GetQuestionsByTourId(packageTour.IdTour).Count() == 0)
             {
                 IsAllowed = "Collapsed";
             }

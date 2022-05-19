@@ -14,16 +14,22 @@ namespace Highway_to_heaven.ViewModels
 {
     class AddPlanetViewModel : ViewModel
     {
-        private string name;
-        private string planetarySystem;
-        private string surfaceArea;
-        private string siderealRotationPeriod;
-        private string minTemp;
-        private string maxTemp;
-        private string description;
+        private string name = "";
+        private string planetarySystem = "";
+        private string surfaceArea = "";
+        private string siderealRotationPeriod = "";
+        private string minTemp = "";
+        private string maxTemp = "";
+        private string description = "";
         private string picture = @"D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\planet.png";
         private readonly TravelService travelService;
+        private string info;
 
+        public string Info
+        {
+            get => info;
+            set => Set(ref info, value);
+        }
         public string Name
         {
             get => name;
@@ -37,7 +43,18 @@ namespace Highway_to_heaven.ViewModels
         public string SurfaceArea
         {
             get => surfaceArea;
-            set => Set(ref surfaceArea, value);
+            set
+            {
+                if (double.TryParse(value, out double temp) || value.Equals(""))
+                {
+                    Set(ref surfaceArea, value);
+                    Info = "";
+                }
+                else
+                {
+                    Info = "Неверный формат площади";
+                }
+            }
         }
         public string SiderealRotationPeriod
         {
@@ -47,12 +64,34 @@ namespace Highway_to_heaven.ViewModels
         public string MinTemp
         {
             get => minTemp;
-            set => Set(ref minTemp, value);
+            set
+            {
+                if (double.TryParse(value, out double temp) || value.Equals("") || value.Equals("-") || value.Equals("+"))
+                {
+                    Set(ref minTemp, value);
+                    Info = "";
+                }
+                else
+                {
+                    Info = "Неверный формат температуры";
+                }
+            }
         }
         public string MaxTemp
         {
             get => maxTemp;
-            set => Set(ref maxTemp, value);
+            set
+            {
+                if (double.TryParse(value, out double temp) || value.Equals("") || value.Equals("-") || value.Equals("+"))
+                {
+                    Set(ref maxTemp, value);
+                    Info = "";
+                }
+                else
+                {
+                    Info = "Неверный формат температуры";
+                }
+            }
         }
         public string Description
         {
@@ -62,7 +101,17 @@ namespace Highway_to_heaven.ViewModels
         public string Picture
         {
             get => picture;
-            set => Set(ref picture, value);
+            set
+            {
+                if (value.Equals(""))
+                {
+                    picture = @"D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\planet.png";
+                }
+                else
+                {
+                    Set(ref picture, value);
+                }
+            }
         }
 
         public ICommand AddCommand { get; }
@@ -77,17 +126,35 @@ namespace Highway_to_heaven.ViewModels
 
         private void onAddCommand(object o)
         {
+           
+
             Planet planet = new Planet();
             planet.Name = name;
             planet.PlanetarySystem = planetarySystem;
-            planet.SurfaceArea = Convert.ToDouble(surfaceArea);
+            planet.SurfaceArea = surfaceArea;
             planet.SiderealRotationPeriod = siderealRotationPeriod;
-            planet.MaxTemp = Convert.ToDouble(maxTemp);
-            planet.MinTemp = Convert.ToDouble(minTemp);
+            planet.MaxTemp = maxTemp;
+            planet.MinTemp = minTemp;
             planet.Description = description;
             planet.Picture = picture;
 
-            travelService.AddNewPlanet(planet);
+            if (name.Equals("") || planetarySystem.Equals("") || surfaceArea.Equals("")
+               || siderealRotationPeriod.Equals("") || maxTemp.Equals("") || minTemp.Equals("") || description.Equals(""))
+            {
+                Info = "Пожалуйста, заполните все поля";
+            }
+            else if (Convert.ToDouble(minTemp) > Convert.ToDouble(maxTemp))
+            {
+                Info = "Минимальная температура больше максимальной";
+            }
+            else if (!travelService.AddNewPlanet(planet))
+            {
+                Info = "Такая планета уже существует";
+            }
+            else
+            {
+                Info = "Планета добавлена";
+            }
         }
         private void onAddPictureCommand(object o)
         {

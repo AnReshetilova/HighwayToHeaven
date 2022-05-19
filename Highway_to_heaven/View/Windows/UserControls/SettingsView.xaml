@@ -6,12 +6,18 @@
              xmlns:local="clr-namespace:Highway_to_heaven.View.Windows.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="850">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Play"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="122*"></ColumnDefinition>
+            <ColumnDefinition Width="213*"></ColumnDefinition>
+            <ColumnDefinition Width="90*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -19,23 +25,24 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel  Grid.Row="1" Grid.Column="1">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Тема" Foreground="White" Height="25"/>
-            <Ellipse Margin=" 20" Width="20" Height="20" Fill="DarkMagenta">
-                <Ellipse.InputBindings>
-                    <MouseBinding Command ="{Binding SetDarkMagentaThemeCommand}"
-                                      MouseAction="LeftClick"/>
-                </Ellipse.InputBindings>
-            </Ellipse>
-                <Ellipse Margin=" 20" Width="20" Height="20" Fill="DarkCyan">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="ТЕМА: " Height="38" Margin="40,0,0,0"/>
+                <Ellipse Margin=" 40" Width="40" Height="40" Fill="DarkMagenta">
                     <Ellipse.InputBindings>
-                        <MouseBinding Command ="{Binding SetDarkCyanThemeCommand}"
+                        <MouseBinding Command ="{Binding SetThemeCommand}"
+                                      CommandParameter="magenta"
+                                      MouseAction="LeftClick"/>
+                    </Ellipse.InputBindings>
+                </Ellipse>
+                <Ellipse Margin="40" Width="40" Height="40" Fill="DarkCyan">
+                    <Ellipse.InputBindings>
+                        <MouseBinding Command ="{Binding SetThemeCommand}"
                                   CommandParameter="cyan"
                                       MouseAction="LeftClick"/>
                     </Ellipse.InputBindings>
                 </Ellipse>
             </StackPanel>
-        
+
         </StackPanel>
     </Grid>
 </UserControl>
