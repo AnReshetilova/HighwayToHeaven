@@ -67,6 +67,7 @@
                     <TextBlock Text="Описание" HorizontalAlignment="Center"/>
                     <TextBox Text ="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,20,0" Height="100" Background="{x:Null}" MaxLength="1000" Foreground="White" TextWrapping="Wrap"/>
                     <Border 
+                        Style="{DynamicResource RoundBtn}"
                              Margin="0,30,0,0"
                             Width="100" Height="100"
                          BorderThickness="2"
@@ -76,29 +77,6 @@
                             <MouseBinding Command ="{Binding AddCommand}"
                                       MouseAction="LeftClick"/>
                         </Border.InputBindings>
-                        <Border.Triggers>
-                            <EventTrigger RoutedEvent="MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.1"
-                                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
-                                            To="#FFE0DAE4">
-                                        </ColorAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.1"
-                                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
-                                            To="DarkMagenta">
-                                        </ColorAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-
-                        </Border.Triggers>
                     </Border>
                 </StackPanel>
             </Border>

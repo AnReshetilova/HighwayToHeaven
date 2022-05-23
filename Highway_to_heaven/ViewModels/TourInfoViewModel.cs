@@ -74,9 +74,7 @@ namespace Highway_to_heaven.ViewModels
             this.packageTour = packageTour;
             TourName = packageTour.TourName;
             PlanetName = packageTour.PlanetName;
-            NumberOFDays = packageTour.NumberOfDays.ToString();
             Discription = packageTour.Description;
-            Raiting = packageTour.Rating.ToString();
             PicturePath = packageTour.SecondPicture;
 
             OpenCommentsCommand = new ExternalCommand(onOpenCommentsCommand);

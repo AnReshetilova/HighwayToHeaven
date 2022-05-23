@@ -19,11 +19,13 @@ namespace Highway_to_heaven.ViewModels
         private readonly TravelService service;
         private string searchText;
         private PackageTour currentTour;
-        public  ICommand createTourInfoViewModelCommand { get; }
+        private string mode = "ВСЕ";
+        User user;
 
         public ObservableCollection<PackageTour> Tours
         {
             get => tours;
+            set => Set(ref tours, value);
         }
 
         public string SearchText
@@ -33,30 +35,58 @@ namespace Highway_to_heaven.ViewModels
             {
                 if (value == "")
                 {
-                    tours = new ObservableCollection<PackageTour>(service.GetToursCollection());
+
+                        tours = new ObservableCollection<PackageTour>(service.GetToursCollection());
+                   
                 }
                 else
                 {
-                    tours = new ObservableCollection<PackageTour>(service.GetToursByName(value));
+                   
+                        tours = new ObservableCollection<PackageTour>(service.GetToursByName(value));
+                   
                 }
                 Set(ref searchText, value);
             }
         }
 
-        public ICommand OpenTourCommand { get; }
+        public string Mode
+        {
+            get => mode;
+            set => Set(ref mode, value);
+        }
 
-        public ToursInfoViewModel(NavigationStore navigationStore, TravelService service, PackageTour currentTour, Func<object, ViewModel> createTourInfoViewModel)
+        public ICommand OpenTourCommand { get; }
+        public ICommand createTourInfoViewModelCommand { get; }
+        public ICommand ChangeModeCommand { get; }
+
+        public ToursInfoViewModel(NavigationStore navigationStore, TravelService service, PackageTour currentTour, Func<object, ViewModel> createTourInfoViewModel, User user)
         {
             this.service = service;
             this.currentTour = currentTour;
             tours = new ObservableCollection<PackageTour>(service.GetToursCollection());
             OpenTourCommand = new ExternalCommand(OnOpenTourCommandExecute);
             createTourInfoViewModelCommand = new NavigateCommand(navigationStore, createTourInfoViewModel);
+            ChangeModeCommand = new ExternalCommand(OnChangeModeCommand);
+            this.user = user;
         }
 
         private void OnOpenTourCommandExecute(object o)
         {
             createTourInfoViewModelCommand.Execute(o);
+        }
+
+        private void OnChangeModeCommand(object o)
+        {
+            if (mode.Equals("ВСЕ"))
+            {
+                Mode = "ПРОЙДЕНО";
+                Tours = new ObservableCollection<PackageTour>(service.GetViewedTours(user.Login));
+            }
+            else
+            {
+                Mode = "ВСЕ";
+                Tours = new ObservableCollection<PackageTour>(service.GetToursCollection());
+            }
         }
     }
 }

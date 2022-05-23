@@ -32,10 +32,11 @@ namespace Highway_to_heaven.Services
             return this.context.Planets.Where(t => t.Name.Contains(name)).AsEnumerable();
         }
 
-        public void AddNewTour(PackageTour packageTour)
+        public int AddNewTour(PackageTour packageTour)
         {
             this.context.PackageTours.Add(packageTour);
             context.SaveChanges();
+            return context.PackageTours.Max(t => t.IdTour);
         }
 
         public bool AddNewPlanet(Planet planet)
@@ -84,6 +85,23 @@ namespace Highway_to_heaven.Services
         public Planet GetPlanetByName(string name)
         {
             return context.Planets.FirstOrDefault(t => t.Name == name);
+        }
+
+        public void AddNewQuestion(Question question)
+        {
+            context.Questions.Add(question);
+            context.SaveChanges();
+        }
+
+        public IEnumerable<PackageTour> GetViewedTours(string userId)
+        {
+            List<PackageTour> packageTours = new List<PackageTour>();
+            foreach(var el in context.Travels.Where(t => t.IdTraveler.Equals(userId)))
+            {
+                packageTours.Add(el.IdTourNavigation);
+            }
+
+            return packageTours;
         }
     }
 }

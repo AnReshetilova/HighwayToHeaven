@@ -16,11 +16,11 @@ namespace Highway_to_heaven.ViewModels
 {
     class RegistrationViewModel : ViewModel
     {
-        private string login;
-        private string password;
-        private string username;
-        private string address;
-        private string age;
+        private string login = "";
+        private string password = "";
+        private string username = "";
+        private string address ="";
+        private string age = "";
         private string avatar = @"D:\вуз\4 сем\OOP_4_sem\Highway_to_heaven\View\Windows\resources\icons\astronaut.jpg";
         private readonly UserService userService;
         private User user;
@@ -103,26 +103,29 @@ namespace Highway_to_heaven.ViewModels
         public void OnRegistrationCommand(object o)
         {
             MD5 passwordHasher = MD5.Create();
-            password = Convert.ToBase64String(passwordHasher.ComputeHash(Encoding.UTF8.GetBytes(Password)));
-
             user = new User();
+            user.Password = Convert.ToBase64String(passwordHasher.ComputeHash(Encoding.UTF8.GetBytes(password)));
             user.Login = login;
-            user.Password = password;
             user.Name = username;
             user.Address = address;
-            user.Age = Convert.ToInt32(age);
+            user.Age = age;
             user.Picture = avatar;
             user.IsAdmin = false;
 
-            if (!userService.AddNewUser(user))
+
+            if (login.Equals("") || password.Equals("") || username.Equals("") || address.Equals("") || age.Equals(""))
             {
-                Info = "Wrong login!";
+                Info = "Не все поля заполнены";
+            }
+            else if (!userService.AddNewUser(user))
+            {
+                Info = "Пользователь с таким логином уже существует";
             }
             else
             {
-                Info = "Excellent";
-            }
-            openLoginViewModel.Execute(o);
+                Info = "Регистрация пошла успешно";
+                openLoginViewModel.Execute(o);
+            }   
         }
     }
 }

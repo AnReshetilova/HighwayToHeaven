@@ -18,12 +18,12 @@ namespace Highway_to_heaven.Services
 
         public User GetUserByLogin(string login)
         {
-            return this.context.Users.FirstOrDefault(t => t.Login.Equals(login));
+            return context.Users.FirstOrDefault(t => t.Login.Equals(login));
         }
 
         public bool AddNewUser(User user)
         {
-            if (GetUserByLogin(user.Login) != null)
+            if (!(GetUserByLogin(user.Login) is null))
             {
                 return false;
             }

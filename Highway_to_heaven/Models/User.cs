@@ -22,7 +22,7 @@ namespace Highway_to_heaven.Models
         [Unicode(false)]
         public string Login { get; set; }
         [Column("password")]
-        [StringLength(20)]
+        [StringLength(100)]
         [Unicode(false)]
         public string Password { get; set; }
         [Column("name")]
@@ -30,7 +30,9 @@ namespace Highway_to_heaven.Models
         [Unicode(false)]
         public string Name { get; set; }
         [Column("age")]
-        public int? Age { get; set; }
+        [StringLength(5)]
+        [Unicode(false)]
+        public string Age { get; set; }
         [Column("address")]
         [StringLength(30)]
         [Unicode(false)]

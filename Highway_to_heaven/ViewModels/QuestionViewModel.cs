@@ -93,7 +93,7 @@ namespace Highway_to_heaven.ViewModels
             ResultCommand = new ExternalCommand(onResultCommand);
 
             question = questions[questionNumber].Question1;
-            answers = new ObservableCollection<Answer>(travelService.GetAnswersBuQuestionId(questions[questionNumber].IdQuestion));
+            answers = new ObservableCollection<Answer>(travelService.GetAnswersBuQuestionId(questions[questionNumber].IdQuestion).OrderBy(t => t.Answer1));
         }
 
         private void onNextCommand(object o)
@@ -106,7 +106,7 @@ namespace Highway_to_heaven.ViewModels
             else
             {
                 Info = "";
-                if (checkedAnswer.IdAnswer == answers.FirstOrDefault(t => t.IsCorrect == true).IdAnswer)
+                if (answers.Where(t => t.IsCorrect == true).Contains(checkedAnswer))
                 {
                     score++;
                 }
@@ -136,7 +136,7 @@ namespace Highway_to_heaven.ViewModels
             else
             {
                 Info = "";
-                if (checkedAnswer.IdAnswer == answers.FirstOrDefault(t => t.IsCorrect == true).IdAnswer)
+                if (answers.Where(t => t.IsCorrect == true).Contains(checkedAnswer))
                 {
                     score++;
                 }

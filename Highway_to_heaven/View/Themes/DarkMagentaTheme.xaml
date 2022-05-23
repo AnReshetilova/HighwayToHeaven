@@ -14,4 +14,29 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderBrush" Value="DarkMagenta"/>
     </Style>
+    <Style x:Key="RoundBtn" TargetType="Border">
+        <Setter Property="BorderBrush" Value="DarkMagenta"/>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Duration="0:0:0.1"
+                                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                                            To="#FFE0DAE4">
+                        </ColorAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Duration="0:0:0.1"
+                                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                                            To="DarkMagenta">
+                        </ColorAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

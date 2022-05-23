@@ -32,6 +32,7 @@ namespace Highway_to_heaven
             userInfo = new User();
             currentTour = new PackageTour();
         }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             navigationStore.CurrentViewModel = CreateLoginViewModel();
@@ -55,10 +56,12 @@ namespace Highway_to_heaven
         {
             this.userInfo = userInfo;
         }
+
         private SettingsViewModel CreateSettingsViewModel()
         {
             return new SettingsViewModel();
         }
+
         private LoginViewModel CreateLoginViewModel()
         {
             return new LoginViewModel(userService, SetUser, navigationStore, CreateRegistrationViewModel, CreateAccountViewModel);
@@ -66,41 +69,49 @@ namespace Highway_to_heaven
 
         private ToursInfoViewModel CreateToursInfoViewModel()
         {
-            return new ToursInfoViewModel(navigationStore, travelService, currentTour, CreateTourInfoViewModel);
+            return new ToursInfoViewModel(navigationStore, travelService, currentTour, CreateTourInfoViewModel, userInfo);
         }
 
         private AccountViewModel CreateAccountViewModel()
         {
             return new AccountViewModel(GetUser, userService);
         }
+
         private TourInfoViewModel CreateTourInfoViewModel(object tour)
         {
             return new TourInfoViewModel(tour as PackageTour, navigationStore, CreateCommentsViewModel, CreateQuestionViewModel, travelService, userInfo);
         }
+
         private AddTourViewModel CreateAddTourViewModel()
         {
             return new AddTourViewModel(travelService);
         }
+
         private RegistrationViewModel CreateRegistrationViewModel()
         {
             return new RegistrationViewModel(userService, navigationStore, CreateLoginViewModel);
         }
+
         private AddPlanetViewModel CreateAddPlanetViewModel()
         {
             return new AddPlanetViewModel(travelService);
         }
+
         private CommentsViewModel CreateCommentsViewModel(object tour)
         {
             return new CommentsViewModel(userService, tour as PackageTour, userInfo);
         }
+
         private PlanetsViewModel CreatePlanetsViewModel()
         {
             return new PlanetsViewModel(travelService);
         }
+
         private QuestionViewModel CreateQuestionViewModel(object tour)
         {
             return new QuestionViewModel(travelService, userInfo, tour as PackageTour);
         }
+
         private StatisticsViewModel CreateStatisticsViewModel()
         {
             return new StatisticsViewModel(userService);

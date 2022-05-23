@@ -23,10 +23,7 @@ namespace Highway_to_heaven.Models
         [StringLength(30)]
         [Unicode(false)]
         public string PlanetName { get; set; }
-        [Column("number_of_days")]
-        public int? NumberOfDays { get; set; }
-        [Column("rating")]
-        public float? Rating { get; set; }
+
         [Column("description")]
         [StringLength(1000)]
         [Unicode(false)]
